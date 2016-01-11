@@ -17,6 +17,5 @@ public class ElectricPot extends JPanel {
 
 	public void drawPot(Graphics gr) {
 		gr.drawImage(img, POT_X, POT_Y, this);
-
 	}
 }

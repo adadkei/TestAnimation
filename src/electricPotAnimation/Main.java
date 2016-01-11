@@ -1,42 +1,43 @@
 package electricPotAnimation;
 
 import java.awt.Color;
-import java.awt.Container;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.io.IOException;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.Timer;
 
-class Main extends JPanel {
-    static Image img;
+import com.change_vision.jude.api.inf.exception.LicenseNotFoundException;
+import com.change_vision.jude.api.inf.exception.NonCompatibleException;
+import com.change_vision.jude.api.inf.exception.ProjectLockedException;
+import com.change_vision.jude.api.inf.exception.ProjectNotFoundException;
+
+import acquisitionOfAstahDiagram.StateMachineDiagram;
+
+class Main extends JFrame {
     // フレームの配置
     final static int HEIGHT = 500;
     final static int WIDTH = 600;
     final static int X = 320;
     final static int Y = 180;
 
-    // Main
-    public static void main(String args[]) {
-        Main japp = new Main();
-        img = japp.getToolkit().getImage(
-                "C:\\Users\\ia12008\\Dropbox\\酒井研究室\\ゼミ4年\\卒研\\image\\yuge.png");
-        JFrame jframe = new JFrame("Anime Gif");
-        Container c = jframe.getContentPane();
-        c.add(japp);
-        jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jframe.setBounds(X, Y, WIDTH, HEIGHT);
-        c.setBackground(Color.WHITE);
-        jframe.setVisible(true);
+    Main() {
+        DrawSteamPanel dsPanel = new DrawSteamPanel();
+        State state = new State();
+        add(dsPanel);
 
+        new Timer(100, dsPanel).start();
     }
 
-    // Paint Method
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        if (img != null) {
-            g.drawImage(img, X - 70, 150, this);
-        }
+    // Main
+    public static void main(String args[]) throws ClassNotFoundException, LicenseNotFoundException, ProjectNotFoundException, NonCompatibleException, IOException, ProjectLockedException, Throwable {
+        JFrame mainFrame = new Main();
+        mainFrame.setTitle("電気ポットアニメーション");
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setBounds(X, Y, WIDTH, HEIGHT);
+        mainFrame.setBackground(Color.WHITE);
+        mainFrame.setVisible(true);
+
+        new StateMachineDiagram();
+        
     }
 }
