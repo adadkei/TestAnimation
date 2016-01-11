@@ -1,4 +1,4 @@
-package ElectricPotAnimation;
+package electricPotAnimation;
 
 import java.awt.Color;
 
@@ -14,6 +14,7 @@ class TestMain extends JFrame {
 
     TestMain() {
         DrawSteamPanel dsPanel = new DrawSteamPanel();
+        State state = new State();
         add(dsPanel);
 
         new Timer(100, dsPanel).start();

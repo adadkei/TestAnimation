@@ -1,4 +1,4 @@
-package ElectricPotAnimation;
+package electricPotAnimation;
 
 import java.awt.Color;
 import java.awt.Container;

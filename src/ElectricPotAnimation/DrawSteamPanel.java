@@ -1,4 +1,4 @@
-package ElectricPotAnimation;
+package electricPotAnimation;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -11,17 +11,25 @@ import javax.swing.Timer;
 
 public class DrawSteamPanel extends JPanel implements ActionListener {
 
-    static int IMAGE_X = 250;
-    static int IMAGE_Y = 150;
     Timer timer;
-    int counter = 0;
+    static int counter = 0;
     Steam steam = new Steam();
+    ElectricPot pot = new ElectricPot();
+    State state = new State();
 
     public DrawSteamPanel() {
 
         setBackground(Color.white);
+        setLayout(null);// これで絶対レイアウトと成る。それぞれのコンポーネントは自分で座標を設定する必要あり
 
-        timer = new Timer(1, this);// 1秒毎にタイマーイベント発生
+        // 電源状態ラベルを追加
+        add(state.getPowerState());// stateクラスから、Jラベルをゲットし、パネルに追加
+        // 状態ラベルを追加
+        add(state.getState());
+        // ボタンを追加
+        add((new Button()).getButton());
+
+        timer = new Timer(1000, this);// 1秒毎にタイマーイベント発生
         timer.setCoalesce(true);
         timer.setRepeats(true); // 繰り返しイベント発生
         timer.start(); // タイマー起動
@@ -37,6 +45,12 @@ public class DrawSteamPanel extends JPanel implements ActionListener {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         steam.drawSteam(g2);
+        pot.drawPot(g2);
+
+        counter++;
+        if (counter > 30)
+            counter = 0;
+        // System.out.println(counter);
     }
 
 }
