@@ -30,14 +30,16 @@ class Main extends JFrame {
 
     // Main
     public static void main(String args[]) throws ClassNotFoundException, LicenseNotFoundException, ProjectNotFoundException, NonCompatibleException, IOException, ProjectLockedException, Throwable {
-        JFrame mainFrame = new Main();
+    	 new StateMachineDiagram();
+    	
+    	JFrame mainFrame = new Main();
         mainFrame.setTitle("電気ポットアニメーション");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setBounds(X, Y, WIDTH, HEIGHT);
         mainFrame.setBackground(Color.WHITE);
         mainFrame.setVisible(true);
 
-        new StateMachineDiagram();
+       
         
     }
 }

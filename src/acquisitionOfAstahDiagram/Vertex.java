@@ -81,6 +81,11 @@ public class Vertex {
 				break;
 			}
 		}
+		for(int i = 0; i < ivx.length; i++){
+			if (ivx[i]==null){
+				ivx[i]=ivx[0];
+			}
+		}
 		return ivx;
 	}
 

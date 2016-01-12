@@ -43,7 +43,7 @@ public class StateMachineDiagram {
 		istate = sdf.get((IStateMachineDiagram) stateContents.get(0));
 		System.out.println("is‚Í" + istate + "‚Å‚·\r\n");
 		
-		new Vertex();
+		//new Vertex();
 		
 	}
 	

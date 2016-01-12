@@ -6,22 +6,27 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.border.EtchedBorder;
 
+import acquisitionOfAstahDiagram.DecisionController;
+
 public class State extends JLabel {
 
     public JLabel power_label;
     public JLabel state_label;
 
+    DecisionController dc = new DecisionController();
+    
     String off = "OFF";
     String on = "ON";
     String boiling = "沸かす";
     String keep_warm = "保温";
     String push_button = "沸騰ボタン";
+    String kara = "";
 
     State() {
         /*
          * 電源状態のラベル
          */
-        power_label = new JLabel(off);
+        power_label = new JLabel(getoff());
         // 文字のフォントの設定
         power_label.setFont(new Font("Meiryo UI", Font.BOLD, 18));
         // ラベルの位置と大きさの設定
@@ -57,5 +62,11 @@ public class State extends JLabel {
 
     public JLabel getState() {
         return state_label;
+    }
+    public String getoff(){
+    	if(dc.checkOff()){
+    		return off;
+    	}
+    	return kara;
     }
 }
