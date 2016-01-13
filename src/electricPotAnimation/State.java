@@ -28,13 +28,13 @@ public class State extends JLabel implements ActionListener {
 
 	String off = "off";
 	String on = "on";
-	String boiling = "沸かす";
-	String keep_warm = "保温";
+	String boiling = "加熱中";
+	String keep_warm = "保温中";
 	String push_button = "沸騰ボタン";
 	String kara = "";
 
 	State() {
-		timer = new Timer(1000, this);// 1秒毎にタイマーイベント発生
+		timer = new Timer(500, this);// 1秒毎にタイマーイベント発生
 		timer.setCoalesce(true);
 		timer.setRepeats(true); // 繰り返しイベント発生
 		timer.start(); // タイマー起動
@@ -62,7 +62,7 @@ public class State extends JLabel implements ActionListener {
 		state_label = new JLabel();
 		// ラベル名を設定
 		// ラベル名を設定
-		state_label.setText(keep_warm);
+		state_label.setText(kara);
 		// 文字のフォントの設定
 		state_label.setFont(new Font("Meiryo UI", Font.BOLD, 18));
 		// ラベルの位置と大きさの設定
@@ -84,6 +84,12 @@ public class State extends JLabel implements ActionListener {
 			power_label.setText(on);
 		}else{
 			power_label.setText(off);
+		}
+		//加熱状態表示
+		if(Button.is_on_clicked && cm.checkHeatingFlow()){
+			state_label.setText(boiling);
+		}else{
+			state_label.setText(kara);
 		}
 		
 	}

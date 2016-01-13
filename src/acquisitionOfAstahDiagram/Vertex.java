@@ -62,6 +62,25 @@ public class Vertex {
 			System.out.println((i + 1) + "個目のincomingは" + incomings[i]);
 		}
 	}
+	/**
+	 * ある状態に入っている、入れ子の状態を配列で返すメソッド
+	 * @param s 任意の状態名
+	 */
+	IVertex[] getSubVertexes(String s){
+		IVertex[] iv = new IVertex[4];
+		for(int i=0; i< iVertexes.length;i++){
+			if(iVertexes[i].toString().equals(s)){//任意の状態名sだったら
+				iv = sdf.getSubVertexes(iVertexes[i]);
+				break;
+			}
+		}
+		for (int i = 0; i < iv.length; i++) {// nullを消すために
+			if (iv[i] == null) {
+				iv[i] = iv[0];
+			}
+		}
+		return iv;
+	}
 
 	/**
 	 * ある状態に入ってくるトリガーを、配列で返すメソッド

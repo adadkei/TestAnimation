@@ -41,6 +41,7 @@ public class DrawSteamPanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		System.out.println(Button.is_on_clicked);
 		repaint();
 	}
 
