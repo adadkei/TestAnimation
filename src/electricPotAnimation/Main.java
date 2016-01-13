@@ -25,7 +25,7 @@ class Main extends JFrame {
         State state = new State();
         add(dsPanel);
 
-       // new Timer(100, dsPanel).start();
+       new Timer(100, dsPanel).start();//•K—v
     }
 
     // Main

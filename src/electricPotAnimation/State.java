@@ -34,7 +34,7 @@ public class State extends JLabel implements ActionListener {
 	String kara = "";
 
 	State() {
-		timer = new Timer(500, this);// 1秒毎にタイマーイベント発生
+		timer = new Timer(100, this);// 1秒毎にタイマーイベント発生
 		timer.setCoalesce(true);
 		timer.setRepeats(true); // 繰り返しイベント発生
 		timer.start(); // タイマー起動

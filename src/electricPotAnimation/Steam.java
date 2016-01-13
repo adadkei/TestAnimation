@@ -19,17 +19,15 @@ public class Steam extends JPanel {
 	}
 
 	public void drawSteam(Graphics gr) {
-		if (Button.is_on_clicked && cm.checkHeatingFlow()) {
-			if (DrawSteamPanel.counter < 30) {
-				gr.drawImage(img, IMAGE_X, IMAGE_Y, this);
-			}
-			if (DrawSteamPanel.counter > 10) {
-				gr.drawImage(img, IMAGE_X - 10, IMAGE_Y - 35, this);
-			}
-			if (DrawSteamPanel.counter > 20) {
-				gr.drawImage(img, IMAGE_X - 20, IMAGE_Y - 70, this);
-			}
-
+		if (DrawSteamPanel.counter < 30) {
+			gr.drawImage(img, IMAGE_X, IMAGE_Y, this);
 		}
+		if (DrawSteamPanel.counter > 10) {
+			gr.drawImage(img, IMAGE_X - 10, IMAGE_Y - 35, this);
+		}
+		if (DrawSteamPanel.counter > 20) {
+			gr.drawImage(img, IMAGE_X - 20, IMAGE_Y - 70, this);
+		}
+
 	}
 }

@@ -22,7 +22,6 @@ public class CheckMethodFinder {
 		}
 		return "";
 	}
-	
 
 	/**
 	 * 開始疑似状態→off→onかつonトリガだったら
@@ -38,6 +37,7 @@ public class CheckMethodFinder {
 
 	/**
 	 * on→off←開始疑似状態かつoffトリガーだったら
+	 * 
 	 * @return boolean
 	 */
 	public boolean checkOffFlow() {
@@ -46,16 +46,15 @@ public class CheckMethodFinder {
 		}
 		return false;
 	}
+
 	/**
-	 *  開始疑似状態→off→onかつonトリガかつ,
-	 * on入れ子開始疑似状態、かつon入れ子加熱中、かつ開始疑似状態→加熱中
+	 * 開始疑似状態→off→onかつonトリガかつ, on入れ子開始疑似状態、かつon入れ子加熱中、かつ開始疑似状態→加熱中
 	 */
-	public boolean checkHeatingFlow(){
-		if(checkOnFlow()&&dc.checkSubVertex("on", "開始疑似状態1")&&dc.checkSubVertex("on", "加熱中")&&dc.checkPreVertex("加熱中", "開始疑似状態1")){
+	public boolean checkHeatingFlow() {
+		if (checkOnFlow() && dc.checkPreSubVertex("on", "加熱中", "開始疑似状態1")) {
 			return true;
 		}
 		return false;
 	}
-	
 
 }

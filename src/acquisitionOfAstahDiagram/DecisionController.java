@@ -49,13 +49,17 @@ public class DecisionController {
 	}
 
 	/**
-	 * 指定した状態に入っている、任意の入れ子があるか調べる。引数に指定した入れ子名があれば、trueを返す
+	 * 指定した入れ子状態の、前の状態を調べる。引数に指定したものと前の状態が一緒だったらtrue
+	 * @param parent_state_name 指定した親状態名
+	 * @param sub_vertex 指定した入れ子状態名
+	 * @param sub_pre_vertex 指定した,前の入れ子状態名
+	 * @return boolean
 	 */
-	public boolean checkSubVertex(String state_name, String check_sub_vertex) {
-		IVertex[] iv = new IVertex[4];// 仮配列
-		iv = vertex.getSubVertexes(state_name);
-		for (int i = 0; i < iv.length; i++) {
-			if (iv[i].toString().equals(check_sub_vertex)) {
+	public boolean checkPreSubVertex(String parent_state_name, String sub_vertex, String sub_pre_vertex) {
+		IVertex[] pre_subVertexes = new IVertex[4];// 仮配列
+		pre_subVertexes = vertex.getSubVertexes(parent_state_name, sub_vertex);
+		for (int i = 0; i < pre_subVertexes.length; i++) {
+			if (pre_subVertexes[i].toString().equals(sub_pre_vertex)) {
 				return true;
 			}
 		}
