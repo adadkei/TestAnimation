@@ -9,7 +9,7 @@ public class Vertex {
 
 	IVertex[] iVertexes;
 	IVertex[] subVertexes;
-	IVertex[] test;
+	// IVertex[] test;
 
 	ITransition[] trasitions;
 	ITransition[] incomings;
@@ -24,10 +24,10 @@ public class Vertex {
 		makeSubVertexes();
 		makeTrasitions();
 		makeIncomings(iVertexes[1]);
-		test = getPreVertex("off");
-		for (int i = 0; i < test.length; i++) {
-			System.out.println("offの前の状態は" + test[i]);
-		}
+		// test = getPreVertex("off");
+		// for (int i = 0; i < test.length; i++) {
+		// System.out.println("offの前の状態は" + test[i]);
+		// }
 
 	}
 
@@ -54,7 +54,7 @@ public class Vertex {
 	}
 
 	/**
-	 * ivはIVertexの型で指定。ある状態に入ってくるトリガーを取得。
+	 * ivはIVertexの型で指定。ある状態に入ってくるトリガーをincomingに入れるメソッド。
 	 */
 	void makeIncomings(IVertex iv) {
 		incomings = sdf.getIncomings(iv);
@@ -64,15 +64,39 @@ public class Vertex {
 	}
 
 	/**
-	 * 任意のある状態の一個前の状態を取得し、それをIVertex配列に格納し、返す
+	 * ある状態に入ってくるトリガーを、配列で返すメソッド
+	 * 
+	 * @param s
+	 *            ある状態の名前
+	 * @return ITransition[] ある状態に入ってくるトリガーの配列
+	 */
+	ITransition[] getIncoming(String s) {
+		ITransition[] it = new ITransition[4];
+		for (int i = 0; i < iVertexes.length; i++) {// 全ての状態でループを回す
+			if (iVertexes[i].toString().equals(s)) {// ある状態名sの時
+				it = iVertexes[i].getIncomings();
+				break;
+			}
+		}
+		for (int i = 0; i < it.length; i++) {// nullを消すために
+			if (it[i] == null) {
+				it[i] = it[0];
+			}
+		}
+		return it;
+	}
+
+	/**
+	 * 任意のある状態の一個前の状態を取得し、それをIVertex配列に格納し、これを返す
 	 * 
 	 * @param s
 	 *            指定したいある状態の名前
 	 * @return IVertex配列
 	 */
 	IVertex[] getPreVertex(String s) {
-		IVertex[] ivx= new IVertex[5];
+		IVertex[] ivx = new IVertex[5];
 		for (int i = 0; i < iVertexes.length; i++) {// 全ての状態でループを回す
+
 			if (iVertexes[i].toString().equals(s)) {// ある状態名sの時
 				ITransition[] it = iVertexes[i].getIncomings();
 				for (int j = 0; j < it.length; j++) {
@@ -81,11 +105,12 @@ public class Vertex {
 				break;
 			}
 		}
-		for(int i = 0; i < ivx.length; i++){
-			if (ivx[i]==null){
-				ivx[i]=ivx[0];
+		for (int i = 0; i < ivx.length; i++) {// nullを消すために
+			if (ivx[i] == null) {
+				ivx[i] = ivx[0];
 			}
 		}
+
 		return ivx;
 	}
 

@@ -15,8 +15,8 @@ import acquisitionOfAstahDiagram.StateMachineDiagram;
 
 class Main extends JFrame {
     // フレームの配置
-    final static int HEIGHT = 500;
-    final static int WIDTH = 600;
+    final static int HEIGHT = 400;
+    final static int WIDTH = 500;
     final static int X = 320;
     final static int Y = 180;
 

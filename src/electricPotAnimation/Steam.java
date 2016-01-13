@@ -7,8 +7,8 @@ import javax.swing.JPanel;
 
 public class Steam extends JPanel {
 
-	static int IMAGE_X = 230;
-	static int IMAGE_Y = 100;
+	static int IMAGE_X = ElectricPot.POT_X-20;
+	static int IMAGE_Y = ElectricPot.POT_Y-20;
 	Image img;
 
 	Steam() {

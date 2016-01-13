@@ -117,7 +117,7 @@ public class StateDiagramFinder {
 	/**
 	 * get 入ってくる遷移配列
 	 * 
-	 * @return list incomings
+	 * @return ある状態に入ってくるトリガー配列
 	 */
 	ITransition[] getIncomings(IVertex iv) {
 		ITransition[] ivs;

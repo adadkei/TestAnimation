@@ -17,6 +17,7 @@ public class DrawSteamPanel extends JPanel implements ActionListener {
 	ElectricPot pot = new ElectricPot();
 	State state = new State();
 	Button button = new Button();
+	//ComboBox cb = new ComboBox();
 
 	public DrawSteamPanel() {
 
