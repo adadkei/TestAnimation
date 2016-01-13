@@ -12,6 +12,8 @@ public class Button implements ActionListener {
 	private JButton button;
 	private JComboBox cmb;
 
+	public static boolean is_on_clicked;
+
 	CheckMethodFinder cm = new CheckMethodFinder();
 
 	// 座標
@@ -30,9 +32,10 @@ public class Button implements ActionListener {
 
 	Button() {
 		// ボタンを追加
-		button = new JButton("");
+		button = new JButton(k1);
 		button.setBounds(b_x, b_y, 100, 30);
 		button.setHorizontalAlignment(JLabel.CENTER);
+		button.addActionListener(this);
 
 		// コンボボックスを追加
 		cmb = new JComboBox(elements);
@@ -55,7 +58,9 @@ public class Button implements ActionListener {
 				button.setText(elements[i]);
 			}
 		}
+		if (cm.checkOnFlow()&&button.getText().equals(k2)) {
+			is_on_clicked = true;
+		}
 	}
-	
-		
+
 }

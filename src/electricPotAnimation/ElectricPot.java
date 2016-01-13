@@ -14,11 +14,16 @@ public class ElectricPot extends JPanel {
 	ElectricPot() {
 		// img =
 		// getToolkit().getImage("C:\\Users\\ia12008\\Dropbox\\酒井研究室\\ゼミ4年\\卒研\\image\\電気ケトル.png");
-		//img = getToolkit().getImage("C:\\Users\\Ikemi\\Dropbox\\酒井研究室\\ゼミ4年\\卒研\\image\\電気ケトル.png");
+		
+		// 暗い方
 		img = getToolkit().getImage("C:\\Users\\Ikemi\\Dropbox\\酒井研究室\\ゼミ4年\\卒研\\image\\pot_mono.png");
 	}
 
 	public void drawPot(Graphics gr) {
+		if (Button.is_on_clicked) {
+			// 明るい方
+			img = getToolkit().getImage("C:\\Users\\Ikemi\\Dropbox\\酒井研究室\\ゼミ4年\\卒研\\image\\電気ケトル.png");
+		}
 		gr.drawImage(img, POT_X, POT_Y, this);
 	}
 }
