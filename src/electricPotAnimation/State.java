@@ -2,14 +2,19 @@ package electricPotAnimation;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.Timer;
 import javax.swing.border.EtchedBorder;
 
 import acquisitionOfAstahDiagram.DecisionController;
 
-public class State extends JLabel {
+public class State extends JLabel implements ActionListener {
 
+	Timer timer;
 	public JLabel power_label;
 	public JLabel state_label;
 
@@ -29,6 +34,10 @@ public class State extends JLabel {
 	String kara = "";
 
 	State() {
+		timer = new Timer(1000, this);// 1秒毎にタイマーイベント発生
+		timer.setCoalesce(true);
+		timer.setRepeats(true); // 繰り返しイベント発生
+		timer.start(); // タイマー起動
 		/*
 		 * 電源状態のラベル
 		 */
@@ -66,7 +75,19 @@ public class State extends JLabel {
 		// 枠線の設定
 		state_label.setBorder(new EtchedBorder(EtchedBorder.RAISED));
 	}
+	
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		//onボタンが押されたら
+		if(Button.is_on_clicked){
+			power_label.setText(on);
+		}else{
+			power_label.setText(off);
+		}
+		
+	}
+	
 	public JLabel getPowerState() {
 		return power_label;
 	}
@@ -74,6 +95,9 @@ public class State extends JLabel {
 	public JLabel getState() {
 		return state_label;
 	}
+
+
+	
 
 	
 

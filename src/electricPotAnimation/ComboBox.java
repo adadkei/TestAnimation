@@ -4,9 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
+import javax.swing.JButton;
 
 public class ComboBox implements ActionListener {
 	private JComboBox cmb;
+	Button btn = new Button();
 
 	int c_x = ElectricPot.POT_X + 150;
 	int c_y = ElectricPot.POT_Y + 80;
@@ -32,6 +34,7 @@ public class ComboBox implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		for (int i = 0; i <= 2; i++) {
 			if (cmb.getSelectedIndex() == i) {
+				btn.getButton().setText(elements[i]);
 			}
 		}
 	}

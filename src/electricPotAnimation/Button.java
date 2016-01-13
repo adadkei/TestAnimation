@@ -12,7 +12,7 @@ public class Button implements ActionListener {
 	private JButton button;
 	private JComboBox cmb;
 
-	public static boolean is_on_clicked;
+	public static boolean is_on_clicked;// ONがクリックされたかどうか
 
 	CheckMethodFinder cm = new CheckMethodFinder();
 
@@ -53,13 +53,22 @@ public class Button implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		for (int i = 0; i <= 2; i++) {
-			if (cmb.getSelectedIndex() == i) {
-				button.setText(elements[i]);
+		if (e.getSource().equals(cmb)) {
+			for (int i = 0; i <= 2; i++) {
+				if (cmb.getSelectedIndex() == i) {
+					button.setText(elements[i]);
+				}
 			}
 		}
-		if (cm.checkOnFlow()&&button.getText().equals(k2)) {
-			is_on_clicked = true;
+		if (e.getSource().equals(button)) {// ボタンが押された時のアクション
+			// ONが押された時のながれ
+			if (cm.checkOnFlow() && button.getText().equals(k2)) {
+				is_on_clicked = true;
+			}
+			// OFFが押された時のながれ
+			if(cm.checkOffFlow() && button.getText().equals(k1)) {
+				is_on_clicked = false;
+			}
 		}
 	}
 

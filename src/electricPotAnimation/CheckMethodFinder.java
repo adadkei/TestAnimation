@@ -3,9 +3,9 @@ package electricPotAnimation;
 import acquisitionOfAstahDiagram.DecisionController;
 
 public class CheckMethodFinder {
-	
+
 	DecisionController dc = new DecisionController();
-	
+
 	/**
 	 * もし、現在の状態名と前の状態名が一致したら、現在の状態名のラベルを設定する 合っていなかったら、空欄を設定する
 	 * 
@@ -30,6 +30,17 @@ public class CheckMethodFinder {
 	 */
 	public boolean checkOnFlow() {
 		if (dc.checkPreVertex("off", "開始疑似状態0") && dc.checkPreVertex("on", "off") && dc.checkIncoming("on", "ON")) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * on→off←開始疑似状態かつoffトリガーだったら
+	 * @return boolean
+	 */
+	public boolean checkOffFlow() {
+		if (dc.checkPreVertex("off", "on") && dc.checkPreVertex("off", "開始疑似状態0") && dc.checkIncoming("off", "OFF")) {
 			return true;
 		}
 		return false;
