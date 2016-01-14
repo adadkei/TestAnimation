@@ -34,7 +34,8 @@ public class CheckMethodAndFieldFinder {
 	 * @return boolean
 	 */
 	public boolean checkOnFlow() {
-		if (dc.checkPreVertex("off", "ŠJn‹^—ó‘Ô0") && dc.checkPreVertex("on", "off") && dc.checkIncoming("on", "ON")) {
+		if (dc.checkPreVertex("off", "ŠJn‹^—ó‘Ô0") && dc.checkPreVertex("on", "off")
+				&& dc.checkVertexIncoming("on", "ON")) {
 			return true;
 		}
 		return false;
@@ -46,7 +47,8 @@ public class CheckMethodAndFieldFinder {
 	 * @return boolean
 	 */
 	public boolean checkOffFlow() {
-		if (dc.checkPreVertex("off", "on") && dc.checkPreVertex("off", "ŠJn‹^—ó‘Ô0") && dc.checkIncoming("off", "OFF")) {
+		if (dc.checkPreVertex("off", "on") && dc.checkPreVertex("off", "ŠJn‹^—ó‘Ô0")
+				&& dc.checkVertexIncoming("off", "OFF")) {
 			return true;
 		}
 		return false;
@@ -57,6 +59,28 @@ public class CheckMethodAndFieldFinder {
 	 */
 	public boolean checkHeatingFlow() {
 		if (checkOnFlow() && dc.checkPreSubVertex("on", "‰Á”M’†", "ŠJn‹^—ó‘Ô1")) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * •¦“«’†‚©‚ÂŠJn‹^—ó‘Ô¨‰Á”M’†‚©‚Â‰Á”M’†¨•Û‰·’†‚©‚Â•¦“«ƒgƒŠƒK‚ª‚ ‚Á‚½‚ç(“ü‚êq‚ª‘O’ñğŒ‚Æ‚È‚Á‚Ä‚¢‚é)
+	 */
+	public boolean checkBoilingToKeepWarmFlow() {
+		if (is_boiling && dc.checkPreSubVertex("on", "‰Á”M’†", "ŠJn‹^—ó‘Ô1") && dc.checkPreSubVertex("on", "•Û‰·’†", "‰Á”M’†")
+				&& dc.checkSubVertexIncoming("on", "•Û‰·’†", "•¦“«")) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * •Û‰·’† ‚©‚Â •Û‰·ó‘Ô¨‰Á”Mó‘Ô ‚©‚Â •¦“«ƒ{ƒ^ƒ“‚ğ‰Ÿ‚·ƒgƒŠƒK
+	 */
+	public boolean checkKeepWarmToBoilingFlow() {
+		if (is_keep_warm && dc.checkPreSubVertex("on", "‰Á”M’†", "•Û‰·’†")
+				&& dc.checkSubVertexIncoming("on", "‰Á”M’†", "•¦“«ƒ{ƒ^ƒ“‚ğ‰Ÿ‚·")) {
 			return true;
 		}
 		return false;

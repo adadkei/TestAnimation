@@ -87,6 +87,38 @@ public class Vertex {
 	}
 
 	/**
+	 * ある入れ子状態に入ってくるトリガーを、配列で返すメソッド
+	 * 
+	 * @param parent_v_name
+	 *            指定した親状態名
+	 * @param sub_v_name
+	 *            指定した入れ子状態名
+	 * @return ある入れ子状態に入ってくるトリガーの配列
+	 */
+	ITransition[] getSubIncoming(String parent_v_name, String sub_v_name) {
+		ITransition[] it = new ITransition[4];
+		IVertex[] sub_vertexes = new IVertex[4];
+
+		for (int i = 0; i < iVertexes.length; i++) {// 全ての状態でループを回す
+			if (iVertexes[i].toString().equals(parent_v_name)) {// ある状態名
+				sub_vertexes = sdf.getSubVertexes(iVertexes[i]);// その親状態の,入れ子状態達をゲット
+				for (int j = 0; j < sub_vertexes.length; j++) {// 入れ子状態配列ループ
+					if (sub_vertexes[j].toString().equals(sub_v_name)) {// 指定の入れ子状態と一致したら
+						it = sub_vertexes[j].getIncomings();
+						break;
+					}
+				}
+			}
+		}
+		for (int i = 0; i < it.length; i++) {// nullを消すために
+			if (it[i] == null) {
+				it[i] = it[0];
+			}
+		}
+		return it;
+	}
+
+	/**
 	 * 任意のある状態の一個前の状態を取得し、それをIVertex配列に格納し、これを返す
 	 * 
 	 * @param s
@@ -116,8 +148,11 @@ public class Vertex {
 
 	/**
 	 * 入れ子のある状態の、前の状態達を配列にして返す
-	 * @param parent_state_name 指定した親状態名
-	 * @param sub_vertex_name 指定した入れ子状態名
+	 * 
+	 * @param parent_state_name
+	 *            指定した親状態名
+	 * @param sub_vertex_name
+	 *            指定した入れ子状態名
 	 * @return 指定した入れ子状態の、前の状態達の配列を返却
 	 */
 	IVertex[] getSubVertexes(String parent_state_name, String sub_vertex_name) {

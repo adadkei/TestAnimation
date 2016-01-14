@@ -18,6 +18,8 @@ public class State extends JLabel implements ActionListener {
 	public JLabel power_label;
 	public JLabel state_label;
 
+	public static int keep_warm_counter;
+
 	// 座標
 	int s1_x = ElectricPot.POT_X - 30;
 	int s1_y = ElectricPot.POT_Y + 120;
@@ -91,7 +93,15 @@ public class State extends JLabel implements ActionListener {
 		} else {
 			state_label.setText(kara);
 		}
-
+		// 保温中表示
+		if (cm.checkBoilingToKeepWarmFlow()) {
+			if (Steam.steam_count >= 70) {// 加熱中アニメーションが終わると
+				state_label.setText(keep_warm);
+				CheckMethodAndFieldFinder.is_boiling = false;
+			}
+			CheckMethodAndFieldFinder.is_keep_warm = true;
+			
+		}
 	}
 
 	public JLabel getPowerState() {

@@ -12,8 +12,6 @@ public class Button implements ActionListener {
 	private JButton button;
 	private JComboBox cmb;
 
-	
-
 	CheckMethodAndFieldFinder cm = new CheckMethodAndFieldFinder();
 
 	// 座標
@@ -53,7 +51,7 @@ public class Button implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource().equals(cmb)) {//コンボボックスアクション
+		if (e.getSource().equals(cmb)) {// コンボボックスアクション
 			for (int i = 0; i <= 2; i++) {
 				if (cmb.getSelectedIndex() == i) {
 					button.setText(elements[i]);
@@ -66,10 +64,19 @@ public class Button implements ActionListener {
 				CheckMethodAndFieldFinder.is_on_clicked = true;
 			}
 			// OFFが押された時のながれ
-			if(cm.checkOffFlow() && button.getText().equals(k1)) {
+			if (cm.checkOffFlow() && button.getText().equals(k1)) {
 				CheckMethodAndFieldFinder.is_on_clicked = false;
 				CheckMethodAndFieldFinder.is_boiling = false;
+				CheckMethodAndFieldFinder.is_keep_warm = false;
+				Steam.steam_count = 0;
 			}
+			// 沸騰ボタンが押された時の流れ
+			if (cm.checkKeepWarmToBoilingFlow() && button.getText().equals(k3)
+					&& !CheckMethodAndFieldFinder.is_boiling) {
+				CheckMethodAndFieldFinder.is_boiling = true;
+				Steam.steam_count = 0;
+			}
+			System.out.println("CheckMethodAndFieldFinder.is_keep_warm=" + CheckMethodAndFieldFinder.is_keep_warm);
 		}
 	}
 
