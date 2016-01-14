@@ -50,14 +50,18 @@ public class DecisionController {
 
 	/**
 	 * 指定した入れ子状態に入ってくるトリガーを調べる。引数に指定したトリガーと同じなら,trueを返す。
-	 * @param parent_v_name 指定した親状態名
-	 * @param sub_v_name 指定した入れ子状態名
-	 * @param checking_tri 指定したトリガー名
+	 * 
+	 * @param parent_v_name
+	 *            指定した親状態名
+	 * @param sub_v_name
+	 *            指定した入れ子状態名
+	 * @param checking_tri
+	 *            指定したトリガー名
 	 * @return 指定したトリガーだったら,true
 	 */
 	public boolean checkSubVertexIncoming(String parent_v_name, String sub_v_name, String checking_tri) {
 		ITransition[] it = new ITransition[4];// 仮配列
-		it = vertex.getSubIncoming(parent_v_name,sub_v_name);
+		it = vertex.getSubIncoming(parent_v_name, sub_v_name);
 		for (int i = 0; i < it.length; i++) {
 			if (it[i].toString().equals(checking_tri)) {
 				return true;

@@ -45,7 +45,7 @@ public class State extends JLabel implements ActionListener {
 		 */
 		power_label = new JLabel();
 		// ラベル名を設定
-		power_label.setText(cm.setLabelChar("off", "開始疑似状態0"));
+		power_label.setText(cm.setLabelChar("off", "開始擬似状態0"));
 		// 文字のフォントの設定
 		power_label.setFont(new Font("Meiryo UI", Font.BOLD, 18));
 		// ラベルの位置と大きさの設定

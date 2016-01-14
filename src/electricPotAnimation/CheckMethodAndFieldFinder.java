@@ -29,7 +29,7 @@ public class CheckMethodAndFieldFinder {
 		return "";
 	}
 	public boolean checkStartToOff(){
-		if(dc.checkPreVertex("off", "開始疑似状態0")){
+		if(dc.checkPreVertex("off", "開始擬似状態0")){
 			return true;
 		}
 		return false;
@@ -41,7 +41,7 @@ public class CheckMethodAndFieldFinder {
 	 * @return boolean
 	 */
 	public boolean checkOnFlow() {
-		if (dc.checkPreVertex("off", "開始疑似状態0") && dc.checkPreVertex("on", "off")
+		if (dc.checkPreVertex("off", "開始擬似状態0") && dc.checkPreVertex("on", "off")
 				&& dc.checkVertexIncoming("on", "ON")) {
 			return true;
 		}
@@ -54,7 +54,7 @@ public class CheckMethodAndFieldFinder {
 	 * @return boolean
 	 */
 	public boolean checkOffFlow() {
-		if (dc.checkPreVertex("off", "on") && dc.checkPreVertex("off", "開始疑似状態0")
+		if (dc.checkPreVertex("off", "on") && dc.checkPreVertex("off", "開始擬似状態0")
 				&& dc.checkVertexIncoming("off", "OFF")) {
 			return true;
 		}
@@ -65,7 +65,7 @@ public class CheckMethodAndFieldFinder {
 	 * 開始疑似状態→off→onかつonトリガかつ, on入れ子開始疑似状態、かつon入れ子加熱中、かつ開始疑似状態→加熱中
 	 */
 	public boolean checkHeatingFlow() {
-		if (checkOnFlow() && dc.checkPreSubVertex("on", "加熱中", "開始疑似状態1")) {
+		if (checkOnFlow() && dc.checkPreSubVertex("on", "加熱中", "開始擬似状態1")) {
 			return true;
 		}
 		return false;
@@ -75,7 +75,7 @@ public class CheckMethodAndFieldFinder {
 	 * 沸騰中かつ開始疑似状態→加熱中かつ加熱中→保温中かつ沸騰トリガがあったら(入れ子が前提条件となっている)
 	 */
 	public boolean checkBoilingToKeepWarmFlow() {
-		if (is_boiling && dc.checkPreSubVertex("on", "加熱中", "開始疑似状態1") && dc.checkPreSubVertex("on", "保温中", "加熱中")
+		if (is_boiling && dc.checkPreSubVertex("on", "加熱中", "開始擬似状態1") && dc.checkPreSubVertex("on", "保温中", "加熱中")
 				&& dc.checkSubVertexIncoming("on", "保温中", "沸騰")) {
 			return true;
 		}
