@@ -2,7 +2,12 @@ package electricPotAnimation;
 
 import acquisitionOfAstahDiagram.DecisionController;
 
-public class CheckMethodFinder {
+public class CheckMethodAndFieldFinder {
+
+	// 状態フォルダー
+	public static boolean is_on_clicked = false;// ONがクリックされたかどうか
+	public static boolean is_boiling = false;// 加熱中かどうか
+	public static boolean is_keep_warm = false;// 保温中かどうか
 
 	DecisionController dc = new DecisionController();
 

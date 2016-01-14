@@ -24,7 +24,7 @@ public class State extends JLabel implements ActionListener {
 	int s2_x = ElectricPot.POT_X + 60;
 	int s2_y = ElectricPot.POT_Y + 120;
 
-	CheckMethodFinder cm = new CheckMethodFinder();
+	CheckMethodAndFieldFinder cm = new CheckMethodAndFieldFinder();
 
 	String off = "off";
 	String on = "on";
@@ -75,25 +75,25 @@ public class State extends JLabel implements ActionListener {
 		// 枠線の設定
 		state_label.setBorder(new EtchedBorder(EtchedBorder.RAISED));
 	}
-	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//onボタンが押されたら
-		if(Button.is_on_clicked){
+		// onボタンが押されたら
+		if (CheckMethodAndFieldFinder.is_on_clicked) {
 			power_label.setText(on);
-		}else{
+		} else {
 			power_label.setText(off);
 		}
-		//加熱状態表示
-		if(Button.is_on_clicked && cm.checkHeatingFlow()){
+		// 加熱状態表示
+		if (cm.checkOnFlow() && CheckMethodAndFieldFinder.is_on_clicked && cm.checkHeatingFlow()) {
 			state_label.setText(boiling);
-		}else{
+			CheckMethodAndFieldFinder.is_boiling = true;
+		} else {
 			state_label.setText(kara);
 		}
-		
+
 	}
-	
+
 	public JLabel getPowerState() {
 		return power_label;
 	}
@@ -101,10 +101,5 @@ public class State extends JLabel implements ActionListener {
 	public JLabel getState() {
 		return state_label;
 	}
-
-
-	
-
-	
 
 }

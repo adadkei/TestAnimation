@@ -12,9 +12,9 @@ public class Button implements ActionListener {
 	private JButton button;
 	private JComboBox cmb;
 
-	public static boolean is_on_clicked;// ONがクリックされたかどうか
+	
 
-	CheckMethodFinder cm = new CheckMethodFinder();
+	CheckMethodAndFieldFinder cm = new CheckMethodAndFieldFinder();
 
 	// 座標
 	int b_x = ElectricPot.POT_X + 150;
@@ -53,7 +53,7 @@ public class Button implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource().equals(cmb)) {
+		if (e.getSource().equals(cmb)) {//コンボボックスアクション
 			for (int i = 0; i <= 2; i++) {
 				if (cmb.getSelectedIndex() == i) {
 					button.setText(elements[i]);
@@ -63,11 +63,12 @@ public class Button implements ActionListener {
 		if (e.getSource().equals(button)) {// ボタンが押された時のアクション
 			// ONが押された時のながれ
 			if (cm.checkOnFlow() && button.getText().equals(k2)) {
-				is_on_clicked = true;
+				CheckMethodAndFieldFinder.is_on_clicked = true;
 			}
 			// OFFが押された時のながれ
 			if(cm.checkOffFlow() && button.getText().equals(k1)) {
-				is_on_clicked = false;
+				CheckMethodAndFieldFinder.is_on_clicked = false;
+				CheckMethodAndFieldFinder.is_boiling = false;
 			}
 		}
 	}

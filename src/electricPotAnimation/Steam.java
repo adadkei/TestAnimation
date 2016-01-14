@@ -10,7 +10,7 @@ public class Steam extends JPanel {
 	static int IMAGE_X = ElectricPot.POT_X - 20;
 	static int IMAGE_Y = ElectricPot.POT_Y - 20;
 	Image img;
-	CheckMethodFinder cm = new CheckMethodFinder();
+	CheckMethodAndFieldFinder cm = new CheckMethodAndFieldFinder();
 
 	Steam() {
 		// img =
@@ -19,15 +19,16 @@ public class Steam extends JPanel {
 	}
 
 	public void drawSteam(Graphics gr) {
-		if (DrawSteamPanel.counter < 30) {
-			gr.drawImage(img, IMAGE_X, IMAGE_Y, this);
+		if (CheckMethodAndFieldFinder.is_boiling) {
+			if (DrawSteamPanel.counter < 30) {
+				gr.drawImage(img, IMAGE_X, IMAGE_Y, this);
+			}
+			if (DrawSteamPanel.counter > 10) {
+				gr.drawImage(img, IMAGE_X - 10, IMAGE_Y - 35, this);
+			}
+			if (DrawSteamPanel.counter > 20) {
+				gr.drawImage(img, IMAGE_X - 20, IMAGE_Y - 70, this);
+			}
 		}
-		if (DrawSteamPanel.counter > 10) {
-			gr.drawImage(img, IMAGE_X - 10, IMAGE_Y - 35, this);
-		}
-		if (DrawSteamPanel.counter > 20) {
-			gr.drawImage(img, IMAGE_X - 20, IMAGE_Y - 70, this);
-		}
-
 	}
 }
