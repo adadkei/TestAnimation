@@ -45,7 +45,7 @@ public class State extends JLabel implements ActionListener {
 		 */
 		power_label = new JLabel();
 		// ラベル名を設定
-		power_label.setText(cm.setLabelChar(off, "開始疑似状態0"));
+		power_label.setText(cm.setLabelChar("off", "開始疑似状態0"));
 		// 文字のフォントの設定
 		power_label.setFont(new Font("Meiryo UI", Font.BOLD, 18));
 		// ラベルの位置と大きさの設定
@@ -80,11 +80,13 @@ public class State extends JLabel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// onボタンが押されたら
-		if (CheckMethodAndFieldFinder.is_on_clicked) {
+
+		if (CheckMethodAndFieldFinder.is_on_clicked) {// onボタンが押されたら
 			power_label.setText(on);
-		} else {
+		} else if (cm.checkStartToOff()) {//開始疑似状態→offがあったら
 			power_label.setText(off);
+		} else {
+			power_label.setText(kara);
 		}
 		// 加熱状態表示
 		if (cm.checkOnFlow() && CheckMethodAndFieldFinder.is_on_clicked && cm.checkHeatingFlow()) {
@@ -100,7 +102,7 @@ public class State extends JLabel implements ActionListener {
 				CheckMethodAndFieldFinder.is_boiling = false;
 			}
 			CheckMethodAndFieldFinder.is_keep_warm = true;
-			
+
 		}
 	}
 

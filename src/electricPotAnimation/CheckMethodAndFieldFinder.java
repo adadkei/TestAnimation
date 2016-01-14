@@ -25,7 +25,14 @@ public class CheckMethodAndFieldFinder {
 		if (dc.checkPreVertex(current_vertex, pre_vertex)) {
 			return current_vertex;
 		}
+
 		return "";
+	}
+	public boolean checkStartToOff(){
+		if(dc.checkPreVertex("off", "ŠJn‹^—ó‘Ô0")){
+			return true;
+		}
+		return false;
 	}
 
 	/**
