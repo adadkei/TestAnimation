@@ -126,4 +126,23 @@ public class CheckMethodAndFieldFinder {
 		}
 		return false;
 	}
+
+	/**
+	 * ”Ä—pB”CˆÓ‚Ìó‘Ô‚P¨”CˆÓ‚Ìó‘Ô‚Q‚©‚Â”CˆÓ‚ÌƒgƒŠƒK‚ª‚ ‚Á‚½‚çAtrue‚ğ•Ô‚·
+	 * 
+	 * @param current_vertex
+	 *            ”CˆÓ‚ÌŒ»İ‚Ìó‘Ô–¼
+	 * @param pre_vertex
+	 *            ”CˆÓ‚Ì‘O‚Ìó‘Ô–¼
+	 * @param trigger
+	 *            ”CˆÓ‚ÌƒgƒŠƒK[–¼
+	 * @return boolean
+	 */
+	public boolean generalPurposeCheckVertexAndTrigger(String current_vertex, String pre_vertex, String trigger) {
+		if (dc.checkPreVertex(current_vertex, pre_vertex) && dc.checkVertexIncoming(current_vertex, trigger)) {
+			return true;
+		}
+		return false;
+	}
+
 }

@@ -21,7 +21,7 @@ public class ElectricPot extends JPanel {
 	}
 
 	public void drawPot(Graphics gr) {
-		if (CheckMethodAndFieldFinder.is_on_clicked) {
+		if (CheckMethodAndFieldFinder.is_on_clicked) {//on状態かどうか
 			// 明るい方
 			// img = getToolkit().getImage(
 			// "C:\\Users\\ia12008\\Dropbox\\酒井研究室\\ゼミ4年\\卒研\\image\\電気ケトル.png");
