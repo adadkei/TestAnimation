@@ -4,6 +4,8 @@ import acquisitionOfAstahDiagram.DecisionController;
 
 public class CheckMethodAndFieldFinder {
 
+	String startState = "開始疑似状態";
+
 	// 状態フォルダー
 	public static boolean is_on_clicked = false;// ONがクリックされたかどうか
 	public static boolean is_boiling = false;// 加熱中かどうか
@@ -28,8 +30,9 @@ public class CheckMethodAndFieldFinder {
 
 		return "";
 	}
-	public boolean checkStartToOff(){
-		if(dc.checkPreVertex("off", "開始擬似状態0")){
+
+	public boolean checkStartToOff() {
+		if (dc.checkPreVertex("off", "開始擬似状態0")) {
 			return true;
 		}
 		return false;
@@ -93,4 +96,13 @@ public class CheckMethodAndFieldFinder {
 		return false;
 	}
 
+	/**
+	 * 開始擬似状態→off→on→加熱中かつ onトリガあったら.入れ子じゃないバージョン
+	 */
+	public boolean checkOnToBoiling() {//お試し
+		if ( checkOnFlow()&&dc.checkPreVertex("加熱中", "on")) {
+			return true;
+		}
+		return false;
+	}
 }

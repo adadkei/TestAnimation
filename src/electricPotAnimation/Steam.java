@@ -15,8 +15,8 @@ public class Steam extends JPanel {
 	CheckMethodAndFieldFinder cm = new CheckMethodAndFieldFinder();
 
 	Steam() {
-		// img =
-		// getToolkit().getImage("C:\\Users\\ia12008\\Dropbox\\ŽðˆäŒ¤‹†Žº\\ƒ[ƒ~4”N\\‘²Œ¤\\image\\yuge.png");
+		// img = getToolkit()
+		// .getImage("C:\\Users\\ia12008\\Dropbox\\ŽðˆäŒ¤‹†Žº\\ƒ[ƒ~4”N\\‘²Œ¤\\image\\yuge.png");
 		img = getToolkit().getImage("C:\\Users\\Ikemi\\Dropbox\\ŽðˆäŒ¤‹†Žº\\ƒ[ƒ~4”N\\‘²Œ¤\\image\\yuge.png");
 	}
 
@@ -33,7 +33,7 @@ public class Steam extends JPanel {
 					gr.drawImage(img, IMAGE_X - 20, IMAGE_Y - 70, this);
 				}
 				steam_count++;
-				System.out.println("steam_count"+steam_count);
+				System.out.println("steam_count" + steam_count);
 			}
 		}
 	}

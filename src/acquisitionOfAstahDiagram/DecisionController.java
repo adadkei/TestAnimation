@@ -12,13 +12,16 @@ public class DecisionController {
 	 * 
 	 * @param current_vertex
 	 *            指定した現在の状態
-	 * @param check_vertex
+	 * @param check_pre_vertex
 	 *            前の状態の名前を指定
 	 * @return boolean
 	 */
 	public boolean checkPreVertex(String current_vertex, String check_pre_vertex) {
 		IVertex[] ivx = new IVertex[4];// 仮配列
 		ivx = vertex.getPreVertex(current_vertex);
+		if (ivx[0] == null) {// nullがあると上手く走らない
+			return false;
+		}
 
 		for (int i = 0; i < ivx.length; i++) {// 全ての状態でループを回す
 			if (ivx[i].toString().equals(check_pre_vertex)) {
@@ -62,6 +65,9 @@ public class DecisionController {
 	public boolean checkSubVertexIncoming(String parent_v_name, String sub_v_name, String checking_tri) {
 		ITransition[] it = new ITransition[4];// 仮配列
 		it = vertex.getSubIncoming(parent_v_name, sub_v_name);
+		if(it[0]==null){
+			return false;
+		}
 		for (int i = 0; i < it.length; i++) {
 			if (it[i].toString().equals(checking_tri)) {
 				return true;
@@ -84,6 +90,10 @@ public class DecisionController {
 	public boolean checkPreSubVertex(String parent_state_name, String sub_vertex, String sub_pre_vertex) {
 		IVertex[] pre_subVertexes = new IVertex[4];// 仮配列
 		pre_subVertexes = vertex.getSubVertexes(parent_state_name, sub_vertex);
+
+		if (pre_subVertexes[0] == null) {// プログラムが上手く走るため
+			return false;
+		}
 		for (int i = 0; i < pre_subVertexes.length; i++) {
 			if (pre_subVertexes[i].toString().equals(sub_pre_vertex)) {
 				return true;
@@ -91,4 +101,7 @@ public class DecisionController {
 		}
 		return false;
 	}
+	/**
+	 * 状態遷移図の中に、入れ子があるかないか調べる
+	 */
 }

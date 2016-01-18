@@ -2,15 +2,12 @@ package electricPotAnimation;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.Timer;
 import javax.swing.border.EtchedBorder;
-
-import acquisitionOfAstahDiagram.DecisionController;
 
 public class State extends JLabel implements ActionListener {
 
@@ -81,20 +78,31 @@ public class State extends JLabel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
+		System.out.println("aaaaaaaaaaaaa");
 		if (CheckMethodAndFieldFinder.is_on_clicked) {// onボタンが押されたら
 			power_label.setText(on);
-		} else if (cm.checkStartToOff()) {//開始疑似状態→offがあったら
+		} else if (cm.checkStartToOff()) {// 開始疑似状態→offがあったら
+			power_label.setText(off);
+		} else if (!CheckMethodAndFieldFinder.is_on_clicked && cm.checkOffFlow()) {// on状態じゃなかったら
 			power_label.setText(off);
 		} else {
 			power_label.setText(kara);
 		}
+
+		//入れ子無しで加熱中までの遷移があったらver
+		if (CheckMethodAndFieldFinder.is_on_clicked && cm.checkOnToBoiling()) {
+			state_label.setText(boiling);
+			CheckMethodAndFieldFinder.is_boiling = true;
+		}
+
 		// 加熱状態表示
-		if (cm.checkOnFlow() && CheckMethodAndFieldFinder.is_on_clicked && cm.checkHeatingFlow()) {
+		if (CheckMethodAndFieldFinder.is_on_clicked && cm.checkOnFlow() && cm.checkHeatingFlow()) {
 			state_label.setText(boiling);
 			CheckMethodAndFieldFinder.is_boiling = true;
 		} else {
 			state_label.setText(kara);
 		}
+
 		// 保温中表示
 		if (cm.checkBoilingToKeepWarmFlow()) {
 			if (Steam.steam_count >= 70) {// 加熱中アニメーションが終わると
@@ -102,8 +110,8 @@ public class State extends JLabel implements ActionListener {
 				CheckMethodAndFieldFinder.is_boiling = false;
 			}
 			CheckMethodAndFieldFinder.is_keep_warm = true;
-
 		}
+
 	}
 
 	public JLabel getPowerState() {
