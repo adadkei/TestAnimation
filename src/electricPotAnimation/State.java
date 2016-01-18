@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.Timer;
 import javax.swing.border.EtchedBorder;
 
+import acquisitionOfAstahDiagram.DecisionController;
+
 public class State extends JLabel implements ActionListener {
 
 	Timer timer;
@@ -79,6 +81,7 @@ public class State extends JLabel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		System.out.println("aaaaaaaaaaaaa");
+		System.out.println("OrNotSubPreVertex() ha"+new DecisionController().OrNotSubPreVertex());
 		if (CheckMethodAndFieldFinder.is_on_clicked) {// onボタンが押されたら
 			power_label.setText(on);
 		} else if (cm.checkStartToOff()) {// 開始疑似状態→offがあったら

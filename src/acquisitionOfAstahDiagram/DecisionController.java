@@ -102,6 +102,14 @@ public class DecisionController {
 		return false;
 	}
 	/**
-	 * 状態遷移図の中に、入れ子があるかないか調べる
+	 * 状態遷移図の中に、入れ子があるかないか調べる.
+	 * 入っていたらtureを返す
 	 */
+	public boolean OrNotSubPreVertex(){
+		IVertex[] pre_subVertexes = vertex.getSubVertex();
+		if(!(pre_subVertexes.length==0)){//配列に何か入っていたら
+			return true;
+		}
+		return false;
+	}
 }

@@ -182,4 +182,12 @@ public class Vertex {
 		return pre_sub_v;
 	}
 
+	/**
+	 * ‘S‚Ä‚Ì“ü‚êqó‘Ô”z—ñ‚ğ•Ô‚·
+	 * 
+	 * @return subVertexes[]
+	 */
+	public IVertex[] getSubVertex() {
+		return subVertexes;
+	}
 }
