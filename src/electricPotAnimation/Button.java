@@ -78,8 +78,8 @@ public class Button implements ActionListener {
 					allStateToOff();
 				}
 			} else {// on¨‰Á”M’†‚Ì—¬‚ê‚ª‚ ‚éê‡A‚Ü‚½‚Í•Û‰·’†¨off
-				if (cm.generalPurposeCheckVertexAndTrigger("‰Á”M’†", "off", "OFF")
-						|| cm.generalPurposeCheckVertexAndTrigger("•Û‰·’†", "off", "OFF")) {
+				if (button.getText().equals(k1)&&(cm.generalPurposeCheckVertexAndTrigger("off", "‰Á”M’†", "OFF")
+						|| cm.generalPurposeCheckVertexAndTrigger("off", "•Û‰·’†", "OFF"))) {
 					allStateToOff();
 				}
 			}
