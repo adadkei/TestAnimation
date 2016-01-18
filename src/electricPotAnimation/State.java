@@ -26,6 +26,7 @@ public class State extends JLabel implements ActionListener {
 	int s2_y = ElectricPot.POT_Y + 120;
 
 	CheckMethodAndFieldFinder cm = new CheckMethodAndFieldFinder();
+	DecisionController dc = new DecisionController();
 
 	String off = "off";
 	String on = "on";
@@ -81,7 +82,7 @@ public class State extends JLabel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		System.out.println("aaaaaaaaaaaaa");
-		System.out.println("OrNotSubPreVertex() ha"+new DecisionController().OrNotSubPreVertex());
+		
 		if (CheckMethodAndFieldFinder.is_on_clicked) {// onボタンが押されたら
 			power_label.setText(on);
 		} else if (cm.checkStartToOff()) {// 開始疑似状態→offがあったら
@@ -98,8 +99,8 @@ public class State extends JLabel implements ActionListener {
 			CheckMethodAndFieldFinder.is_boiling = true;
 		}
 
-		// 加熱状態表示
-		if (CheckMethodAndFieldFinder.is_on_clicked && cm.checkOnFlow() && cm.checkHeatingFlow()) {
+		// 加熱状態表示(入れ子あり)
+		if (dc.OrNotSubPreVertex()&&CheckMethodAndFieldFinder.is_on_clicked && cm.checkOnFlow() && cm.checkHeatingFlow()) {
 			state_label.setText(boiling);
 			CheckMethodAndFieldFinder.is_boiling = true;
 		} else {
@@ -107,7 +108,7 @@ public class State extends JLabel implements ActionListener {
 		}
 
 		// 保温中表示
-		if (cm.checkBoilingToKeepWarmFlow()) {
+		if (dc.OrNotSubPreVertex()&&cm.checkBoilingToKeepWarmFlow()) {
 			if (Steam.steam_count >= 70) {// 加熱中アニメーションが終わると
 				state_label.setText(keep_warm);
 				CheckMethodAndFieldFinder.is_boiling = false;
