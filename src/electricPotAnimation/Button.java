@@ -71,7 +71,7 @@ public class Button implements ActionListener {
                 Steam.steam_count = 0;
             }
             // •¦“«ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½Žž‚Ì—¬‚ê
-            if (cm.checkKeepWarmToBoilingFlow() && button.getText().equals(k3)
+            if ((cm.checkKeepWarmToBoilingFlow()||cm.subCheckKeepWarmToBoilingFlow()) && button.getText().equals(k3)
                     && !CheckMethodAndFieldFinder.is_boiling) {
                 CheckMethodAndFieldFinder.is_boiling = true;
                 Steam.steam_count = 0;
