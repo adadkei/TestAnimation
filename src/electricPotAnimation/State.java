@@ -90,7 +90,15 @@ public class State extends JLabel implements ActionListener {
 		} else {
 			power_label.setText(kara);
 		}
+		
+		//トリガーonがなければ、自動的にon状態に移行
+		if(isTriggerON()){
+			CheckMethodAndFieldFinder.is_on_clicked=true;
+		}
 
+			
+			
+			
 		// 加熱状態表示(入れ子あり) または入れ子無しで加熱中までの遷移があったら
 		if (dc.OrNotSubPreVertex() && CheckMethodAndFieldFinder.is_on_clicked && cm.checkOnFlow()
 				&& cm.subCheckHeatingFlow() || (CheckMethodAndFieldFinder.is_on_clicked && cm.checkOnToBoiling())) {
@@ -109,6 +117,17 @@ public class State extends JLabel implements ActionListener {
 			CheckMethodAndFieldFinder.is_keep_warm = true;
 		}
 
+	}
+	
+	/**
+	 * 開始擬似状態→off→on→加熱　かつ　onトリガなしのとき
+	 * @return
+	 */
+	public boolean isTriggerON(){
+		if(dc.checkPreVertex("off", "開始擬似状態0")&&dc.checkPreVertex("on","off")&&dc.checkVertexIncoming("on", kara)){
+			return true;
+		}
+		return false;
 	}
 
 	public JLabel getPowerState() {

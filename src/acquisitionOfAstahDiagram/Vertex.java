@@ -35,9 +35,10 @@ public class Vertex {
 	 * 入れ子の状態(vertex)を全て配列で取得し、subVertexes配列に入れる
 	 */
 	void makeSubVertexes() {
-		for (int i = 0; i < iVertexes.length; i++)
+		for (int i = 0; i < iVertexes.length; i++) {
 			subVertexes = sdf.getSubVertexes(iVertexes[i]);
-
+		}
+		
 		for (int i = 0; i < subVertexes.length; i++) {
 			System.out.println((i + 1) + "個目の入れ子の状態は" + subVertexes[i]);
 		}
