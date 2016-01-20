@@ -1,8 +1,11 @@
 package acquisitionOfAstahDiagram;
 
+import com.change_vision.jude.api.inf.exception.InvalidEditingException;
+import com.change_vision.jude.api.inf.model.INamedElement;
 import com.change_vision.jude.api.inf.model.ITransition;
 import com.change_vision.jude.api.inf.model.IVertex;
 
+import JP.co.esm.caddies.jomt.jcontrol.SetNameCommand;
 import JP.co.esm.caddies.jomt.jview.in;
 
 public class Vertex {
@@ -21,9 +24,15 @@ public class Vertex {
 		for (int i = 0; i < iVertexes.length; i++) {
 			System.out.println((i + 1) + "個目の状態は" + iVertexes[i]);
 		}
+
 		makeSubVertexes();
 		makeTrasitions();
-		makeIncomings(iVertexes[1]);
+
+
+		for (int j = 0; j < iVertexes.length; j++) {
+			System.out.println("開始は" + iVertexes[j].toString());
+		}
+
 		// test = getPreVertex("off");
 		// for (int i = 0; i < test.length; i++) {
 		// System.out.println("offの前の状態は" + test[i]);
@@ -35,10 +44,11 @@ public class Vertex {
 	 * 入れ子の状態(vertex)を全て配列で取得し、subVertexes配列に入れる
 	 */
 	void makeSubVertexes() {
+
 		for (int i = 0; i < iVertexes.length; i++) {
 			subVertexes = sdf.getSubVertexes(iVertexes[i]);
 		}
-		
+
 		for (int i = 0; i < subVertexes.length; i++) {
 			System.out.println((i + 1) + "個目の入れ子の状態は" + subVertexes[i]);
 		}
@@ -191,4 +201,5 @@ public class Vertex {
 	public IVertex[] getSubVertex() {
 		return subVertexes;
 	}
+
 }

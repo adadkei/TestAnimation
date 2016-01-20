@@ -36,8 +36,8 @@ public class CheckMethodAndFieldFinder {
 			return true;
 		}
 		return false;
+		
 	}
-
 	/**
 	 * ŠJn‹^—ó‘Ô¨off¨on‚©‚ÂonƒgƒŠƒK‚¾‚Á‚½‚ç
 	 * 

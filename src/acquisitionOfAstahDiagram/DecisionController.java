@@ -24,7 +24,12 @@ public class DecisionController {
 		}
 
 		for (int i = 0; i < ivx.length; i++) {// 全ての状態でループを回す
+			
 			if (ivx[i].toString().equals(check_pre_vertex)) {
+				return true;
+			}
+			// 開始状態判別用。"開始"で始めればOKにするため。
+			if (check_pre_vertex.startsWith("開始") && ivx[i].toString().startsWith("開始")) {
 				return true;
 			}
 		}
@@ -65,7 +70,7 @@ public class DecisionController {
 	public boolean checkSubVertexIncoming(String parent_v_name, String sub_v_name, String checking_tri) {
 		ITransition[] it = new ITransition[4];// 仮配列
 		it = vertex.getSubIncoming(parent_v_name, sub_v_name);
-		if(it[0]==null){
+		if (it[0] == null) {
 			return false;
 		}
 		for (int i = 0; i < it.length; i++) {
@@ -98,16 +103,20 @@ public class DecisionController {
 			if (pre_subVertexes[i].toString().equals(sub_pre_vertex)) {
 				return true;
 			}
+			// 開始状態判別用。"開始"で始めればOKにするため。
+			if (sub_pre_vertex.startsWith("開始") && pre_subVertexes[i].toString().startsWith("開始")) {
+				return true;
+			}
 		}
 		return false;
 	}
+
 	/**
-	 * 状態遷移図の中に、入れ子があるかないか調べる.
-	 * 入っていたらtureを返す
+	 * 状態遷移図の中に、入れ子があるかないか調べる. 入っていたらtureを返す
 	 */
-	public boolean OrNotSubPreVertex(){
+	public boolean OrNotSubPreVertex() {
 		IVertex[] pre_subVertexes = vertex.getSubVertex();
-		if(!(pre_subVertexes.length==0)){//配列に何か入っていたら
+		if (!(pre_subVertexes.length == 0)) {// 配列に何か入っていたら
 			return true;
 		}
 		return false;

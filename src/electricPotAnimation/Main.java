@@ -58,7 +58,7 @@ class Main extends JFrame {
 		JFrame subFrame = new Main();
 		subFrame.setTitle("電気ポットアニメーションフィードバック");
 		subFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		subFrame.setBounds(X+200, Y+30, WIDTH+100, HEIGHT+100);
+		subFrame.setBounds(X+200, Y+30, WIDTH+100, HEIGHT+200);
 		subFrame.setBackground(Color.WHITE);
 		subFrame.add(dsPanel);
 		subFrame.setVisible(true);
