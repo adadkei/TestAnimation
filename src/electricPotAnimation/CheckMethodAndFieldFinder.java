@@ -254,4 +254,89 @@ public class CheckMethodAndFieldFinder {
 	//////////////////////////////////////////
 	// トリガー
 	/////////////////////////////////////////
+
+	/**
+	 * onに入ってくるONトリガー
+	 * 
+	 * @return
+	 */
+	public boolean onTrigger() {
+		if (dc.checkVertexIncoming("on", "ON")) {
+			return true;
+		}
+		return false;
+
+	}
+
+	/**
+	 * offに入ってくるOFFトリガー
+	 * 
+	 * @return
+	 */
+	public boolean offTrigger() {
+		if (dc.checkVertexIncoming("off", "OFF")) {
+			return true;
+		}
+		return false;
+
+	}
+
+	/**
+	 * 保温に入ってくる沸騰トリガー
+	 * 
+	 * @return
+	 */
+	public boolean boilTrigger() {
+		if (dc.checkVertexIncoming("保温中", "沸騰")) {
+			return true;
+		}
+		return false;
+
+	}
+
+	/**
+	 * 加熱中に入ってくる沸騰ボタントリガー
+	 * 
+	 * @return
+	 */
+	public boolean boilButtonTrigger() {
+		if (dc.checkVertexIncoming("加熱中", "沸騰ボタンを押す")) {
+			return true;
+		}
+		return false;
+
+	}
+
+	///////////////////////////////////////////////
+	// 入れ子 トリガー
+	///////////////////////////////////////////////
+
+	/**
+	 * 入れ子<br>
+	 * 保温に入ってくる沸騰トリガー
+	 * 
+	 * @return
+	 */
+	public boolean subBoilTrigger() {
+		if (dc.checkSubVertexIncoming("on", "保温中", "沸騰")) {
+			return true;
+		}
+		return false;
+
+	}
+
+	/**
+	 * 入れ子<br>
+	 * 加熱中に入ってくる沸騰ボタントリガー
+	 * 
+	 * @return
+	 */
+	public boolean subBoilButtonTrigger() {
+		if (dc.checkSubVertexIncoming("on", "加熱中", "沸騰ボタンを押す")) {
+			return true;
+		}
+		return false;
+
+	}
+
 }
