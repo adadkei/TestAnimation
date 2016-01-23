@@ -36,8 +36,9 @@ public class CheckMethodAndFieldFinder {
 			return true;
 		}
 		return false;
-		
+
 	}
+
 	/**
 	 * ŠJn‹^—ó‘Ô¨off¨on‚©‚ÂonƒgƒŠƒK‚¾‚Á‚½‚ç
 	 * 
@@ -127,22 +128,130 @@ public class CheckMethodAndFieldFinder {
 		return false;
 	}
 
-	/**
-	 * ”Ä—pB”CˆÓ‚Ìó‘Ô‚P¨”CˆÓ‚Ìó‘Ô‚Q‚©‚Â”CˆÓ‚ÌƒgƒŠƒK‚ª‚ ‚Á‚½‚çAtrue‚ğ•Ô‚·
+	/************************************************************************
 	 * 
-	 * @param current_vertex
-	 *            ”CˆÓ‚ÌŒ»İ‚Ìó‘Ô–¼
-	 * @param pre_vertex
-	 *            ”CˆÓ‚Ì‘O‚Ìó‘Ô–¼
-	 * @param trigger
-	 *            ”CˆÓ‚ÌƒgƒŠƒK[–¼
-	 * @return boolean
+	 * ‚±‚±‚©‚ç‚ÍA‚»‚ê‚¼‚ê‚Ìó‘Ô,ƒgƒŠƒK[‚Ì”»•Êƒƒ\ƒbƒh
+	 * 
+	 *************************************************************************/
+
+	//////////////////////////////////////////////////////////
+	// ó‘Ô
+	/////////////////////////////////////////////////////////
+
+	/**
+	 * ŠJn¨off
+	 * 
+	 * @return
 	 */
-	public boolean generalPurposeCheckVertexAndTrigger(String current_vertex, String pre_vertex, String trigger) {
-		if (dc.checkPreVertex(current_vertex, pre_vertex) && dc.checkVertexIncoming(current_vertex, trigger)) {
+	public boolean startToOff() {
+		if (dc.checkPreVertex("off", "ŠJn")) {
 			return true;
 		}
 		return false;
 	}
 
+	/**
+	 * off¨on
+	 * 
+	 * @return
+	 */
+	public boolean offToOn() {
+		if (dc.checkPreVertex("on", "off")) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * on¨off
+	 * 
+	 * @return
+	 */
+	public boolean onToOff() {
+		if (dc.checkPreVertex("off", "on")) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * ŠJn¨‰Á”M’†
+	 * 
+	 * @return
+	 */
+	public boolean startToBoil() {
+		if (dc.checkPreVertex("‰Á”M’†", "ŠJn")) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * ‰Á”M’†¨•Û‰·’†
+	 * 
+	 * @return
+	 */
+	public boolean boilToKeep() {
+		if (dc.checkPreVertex("•Û‰·’†", "‰Á”M’†")) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * •Û‰·’†¨‰Á”M’†
+	 * 
+	 * @return
+	 */
+	public boolean keepToBoil() {
+		if (dc.checkPreVertex("‰Á”M’†", "•Û‰·’†")) {
+			return true;
+		}
+		return false;
+	}
+
+	//////////////////////////////////////////
+	// “ü‚êqó‘Ô
+	/////////////////////////////////////////
+	/**
+	 * “ü‚êq<br>
+	 * ŠJn¨‰Á”M’†
+	 * 
+	 * @return
+	 */
+	public boolean subStartToBoil() {
+		if (dc.checkPreSubVertex("on", "‰Á”M’†", "ŠJn")) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * “ü‚êq<br>
+	 * ‰Á”M’†¨•Û‰·’†
+	 * 
+	 * @return
+	 */
+	public boolean subBoilToKeep() {
+		if (dc.checkPreSubVertex("on", "•Û‰·’†", "‰Á”M’†")) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * “ü‚êq<br>
+	 * •Û‰·’†¨‰Á”M’†
+	 * 
+	 * @return
+	 */
+	public boolean subKeepToBoil() {
+		if (dc.checkPreSubVertex("on", "•Û‰·’†", "‰Á”M’†")) {
+			return true;
+		}
+		return false;
+	}
+	//////////////////////////////////////////
+	// ƒgƒŠƒK[
+	/////////////////////////////////////////
 }

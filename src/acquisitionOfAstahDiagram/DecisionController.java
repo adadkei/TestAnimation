@@ -24,7 +24,7 @@ public class DecisionController {
 		}
 
 		for (int i = 0; i < ivx.length; i++) {// ‘S‚Ä‚Ìó‘Ô‚Åƒ‹[ƒv‚ð‰ñ‚·
-			
+
 			if (ivx[i].toString().equals(check_pre_vertex)) {
 				return true;
 			}
@@ -121,4 +121,24 @@ public class DecisionController {
 		}
 		return false;
 	}
+
+	/**
+	 * ”Ä—pB”CˆÓ‚Ìó‘Ô‚P¨”CˆÓ‚Ìó‘Ô‚Q‚©‚Â”CˆÓ‚ÌƒgƒŠƒK‚ª‚ ‚Á‚½‚çAtrue‚ð•Ô‚·
+	 * 
+	 * @param current_vertex
+	 *            ”CˆÓ‚ÌŒ»Ý‚Ìó‘Ô–¼
+	 * @param pre_vertex
+	 *            ”CˆÓ‚Ì‘O‚Ìó‘Ô–¼
+	 * @param trigger
+	 *            ”CˆÓ‚ÌƒgƒŠƒK[–¼
+	 * @return boolean
+	 */
+	public boolean generalPurposeCheckVertexAndTrigger(String current_vertex, String pre_vertex, String trigger) {
+		if (checkPreVertex(current_vertex, pre_vertex) && checkVertexIncoming(current_vertex, trigger)) {
+			return true;
+		}
+		return false;
+	}
+
+	
 }
