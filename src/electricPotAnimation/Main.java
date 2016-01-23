@@ -34,12 +34,14 @@ class Main extends JFrame {
 		new StateMachineDiagram();
 
 		DrawSteamPanel dsPanel = new DrawSteamPanel();
-		FeedbakckPanel fbPanel = new FeedbakckPanel();
+		FeedbackPanel fbPanel = new FeedbackPanel();
 		
 		new Timer(100, dsPanel).start();// •K—v
 		
 		makeFeedbackFrame(fbPanel);
 		makeMainFrame(dsPanel);
+		
+		FeedBackDiscrimination fbd = new FeedBackDiscrimination();
 		
 		
 
