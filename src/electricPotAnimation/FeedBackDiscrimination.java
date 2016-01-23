@@ -4,36 +4,27 @@ public class FeedBackDiscrimination {
 
 	CheckMethodAndFieldFinder cm = new CheckMethodAndFieldFinder();
 
-	public FeedBackDiscrimination() {
-		if (cm.startToOff()) {
-			System.out.println("ok");
+	/**
+	 * 全ての状態が解答と一緒だったら.入れ子も使われているということ
+	 * @return
+	 */
+	public boolean isAllState() {
+		if (cm.startToOff() && cm.offToOn() && cm.onToOff() && cm.subStartToBoil() && cm.subBoilToKeep()
+				&& cm.subKeepToBoil()) {
+			return true;
 		}
-		if (cm.offToOn()) {
-			System.out.println("ok");
+		return false;
+
+	}
+
+	/**
+	 * 全てのトリガーが解答と一緒だったら。入れ子も使われているということ
+	 * @return
+	 */
+	public boolean isAllTrigger() {
+		if (cm.onTrigger() && cm.offTrigger() && cm.subBoilTrigger() && cm.subBoilButtonTrigger()) {
+			return true;
 		}
-		if (cm.onToOff()) {
-			System.out.println("ok");
-		}
-		if (cm.subStartToBoil()) {
-			System.out.println("ok");
-		}
-		if (cm.subBoilToKeep()) {
-			System.out.println("ok");
-		}
-		if (cm.subKeepToBoil()) {
-			System.out.println("ok");
-		}
-		if (cm.onTrigger()) {
-			System.out.println("ok");
-		}
-		if (cm.offTrigger()) {
-			System.out.println("ok");
-		}
-		if (cm.subBoilTrigger()) {
-			System.out.println("ok");
-		}
-		if (cm.subBoilButtonTrigger()) {
-			System.out.println("ok");
-		}
+		return false;
 	}
 }

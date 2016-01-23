@@ -9,8 +9,14 @@ import javax.swing.JLabel;
 
 public class FeedbackCharacter extends JLabel {
 
+	FeedBackDiscrimination fdb = new FeedBackDiscrimination();
+
 	JLabel mainSentence;
 	JLabel answerSentence;
+	JLabel stateSentence;
+	JLabel triggerSentence;
+	JLabel subStateSentence;
+
 	JLabel sentence1;
 	JLabel sentence2;
 	JLabel sentence3;
@@ -32,6 +38,10 @@ public class FeedbackCharacter extends JLabel {
 	FeedbackCharacter() {
 
 		makeAnswerSentence();
+		makeStateSentence();
+		makeTriggerSentence();
+		makeSubStateSentence();
+
 		makeSentence1();
 		makeSentence2();
 		makeSentence3();
@@ -73,11 +83,41 @@ public class FeedbackCharacter extends JLabel {
 
 	private void makeAnswerSentence() {
 		answerSentence = new JLabel();
-		answerSentence.setText(mistake);
+		// Ç‡ÇµëSÇƒçáÇ¡ÇƒÇ¢ÇΩÇÁ
+		if (fdb.isAllState() && fdb.isAllTrigger()) {
+			answerSentence.setText(correct);
+		} else {
+			answerSentence.setText(mistake);
+		}
+
 		answerSentence.setBounds(Main.X - 220, Main.Y - 250, 300, 250);
 		answerSentence.setFont(new Font("Meiryo UI", Font.PLAIN | Font.BOLD, 19));
 		answerSentence.setForeground(Color.RED);
 		label.add(answerSentence);
+	}
+
+	private void makeStateSentence() {
+		stateSentence = new JLabel();
+		stateSentence.setText(incorrect_State);
+		stateSentence.setBounds(Main.X - 200, Main.Y - 200, 600, 250);
+		stateSentence.setFont(new Font("Meiryo UI", Font.PLAIN, 17));
+		label.add(stateSentence);
+	}
+
+	private void makeTriggerSentence() {
+		triggerSentence = new JLabel();
+		triggerSentence.setText(incorrect_trigger);
+		triggerSentence.setBounds(Main.X - 200, Main.Y - 160, 700, 250);
+		triggerSentence.setFont(new Font("Meiryo UI", Font.PLAIN, 17));
+		label.add(triggerSentence);
+	}
+
+	private void makeSubStateSentence() {
+		subStateSentence = new JLabel();
+		subStateSentence.setText(is_sub_state);
+		subStateSentence.setBounds(Main.X - 200, Main.Y - 120, 700, 250);
+		subStateSentence.setFont(new Font("Meiryo UI", Font.PLAIN, 17));
+		label.add(subStateSentence);
 	}
 
 	public List<JLabel> getFeedbackChar1() {
