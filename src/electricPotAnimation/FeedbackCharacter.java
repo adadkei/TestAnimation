@@ -28,10 +28,10 @@ public class FeedbackCharacter extends JLabel {
 	String disappoint = "惜しい";
 
 	String incorrect_State = "状態の数が，間違っています.適切な状態名かどうかも確認してください";
-	String correct_state = "状態の数が，合っています!";
+	String correct_state = "状態の数は，合っています!";
 
 	String incorrect_trigger = "どこかのトリガーが，間違っています．適切なトリガー名かどうかも確認してください";
-	String correcr_trigger = "全てのトリガーは，合っています！";
+	String correct_trigger = "全てのトリガーは，合っています！";
 
 	String is_sub_state = "状態の入れ子を利用してみよう！";
 
@@ -83,11 +83,13 @@ public class FeedbackCharacter extends JLabel {
 
 	private void makeAnswerSentence() {
 		answerSentence = new JLabel();
-		// もし全て合っていたら
-		if (fdb.isAllState() && fdb.isAllTrigger()) {
-			answerSentence.setText(correct);
+
+		if (fdb.isAllState() && fdb.isAllTrigger()) {// もし状態とトリガーがあっていたら
+			answerSentence.setText(correct);// 正解を表示
+		} else if (fdb.isAnotherState() && fdb.isAnotherTrigger()) {// もし、違うバージョンの解答をしたら
+			answerSentence.setText(disappoint);// 惜しいを表示
 		} else {
-			answerSentence.setText(mistake);
+			answerSentence.setText(mistake);// 不正解を表示
 		}
 
 		answerSentence.setBounds(Main.X - 220, Main.Y - 250, 300, 250);
@@ -98,7 +100,12 @@ public class FeedbackCharacter extends JLabel {
 
 	private void makeStateSentence() {
 		stateSentence = new JLabel();
-		stateSentence.setText(incorrect_State);
+		if (fdb.isAllState()) {
+			stateSentence.setText(correct_state);
+		} else {
+			stateSentence.setText(incorrect_State);
+		}
+
 		stateSentence.setBounds(Main.X - 200, Main.Y - 200, 600, 250);
 		stateSentence.setFont(new Font("Meiryo UI", Font.PLAIN, 17));
 		label.add(stateSentence);
@@ -106,7 +113,11 @@ public class FeedbackCharacter extends JLabel {
 
 	private void makeTriggerSentence() {
 		triggerSentence = new JLabel();
-		triggerSentence.setText(incorrect_trigger);
+		if (fdb.isAllTrigger()) {
+			triggerSentence.setText(correct_trigger);
+		} else {
+			triggerSentence.setText(incorrect_trigger);
+		}
 		triggerSentence.setBounds(Main.X - 200, Main.Y - 160, 700, 250);
 		triggerSentence.setFont(new Font("Meiryo UI", Font.PLAIN, 17));
 		label.add(triggerSentence);
@@ -114,7 +125,9 @@ public class FeedbackCharacter extends JLabel {
 
 	private void makeSubStateSentence() {
 		subStateSentence = new JLabel();
-		subStateSentence.setText(is_sub_state);
+		if (fdb.isAnotherState()) {// もし違うバージョンで状態を作っていたら
+			subStateSentence.setText(is_sub_state);
+		}
 		subStateSentence.setBounds(Main.X - 200, Main.Y - 120, 700, 250);
 		subStateSentence.setFont(new Font("Meiryo UI", Font.PLAIN, 17));
 		label.add(subStateSentence);
