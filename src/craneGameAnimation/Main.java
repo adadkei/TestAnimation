@@ -17,7 +17,7 @@ public class Main extends JFrame {
 	// フレームの配置
 	final static int HEIGHT = 700;
 	final static int WIDTH = 1000;
-	final static int X = 150;
+	final static int X = 170;
 	final static int Y = 150;
 
 	Main() {
