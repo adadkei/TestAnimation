@@ -63,7 +63,6 @@ public class State extends JLabel implements ActionListener {
 		 */
 		state_label = new JLabel();
 		// ラベル名を設定
-		// ラベル名を設定
 		state_label.setText(kara);
 		// 文字のフォントの設定
 		state_label.setFont(new Font("Meiryo UI", Font.BOLD, 18));

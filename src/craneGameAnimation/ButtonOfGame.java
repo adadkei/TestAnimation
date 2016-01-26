@@ -15,8 +15,8 @@ public class ButtonOfGame implements ActionListener {
 	private JButton coinButton;
 
 	// ç¿ïW
-	int b_x = FrontIllustration.FRONT_ILL_X + 380;
-	int b_y = FrontIllustration.FRONT_ILL_Y + 350;
+	int b_x = FrontIllustration.FRONT_ILL_X + 400;
+	int b_y = FrontIllustration.FRONT_ILL_Y + 420;
 
 	// ï∂éö
 	String right = "Å®";
