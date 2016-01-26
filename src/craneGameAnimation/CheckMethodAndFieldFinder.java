@@ -44,241 +44,350 @@ public class CheckMethodAndFieldFinder {
 	public static boolean is_move_left = false;
 	public static boolean is_move_this_side = false;
 	public static boolean is_prize_action = false;
-	
+
 	/************************************************************************
-     * 
-     * ここからは、それぞれの状態,トリガーの判別メソッド
-     * 
-     *************************************************************************/
+	 * 
+	 * ここからは、それぞれの状態,トリガーの判別メソッド
+	 * 
+	 *************************************************************************/
 
-    // ////////////////////////////////////////////////////////
-    // 状態
-    // ///////////////////////////////////////////////////////
+	// ////////////////////////////////////////////////////////
+	// 状態
+	// ///////////////////////////////////////////////////////
 
-    /**
-     * 開始→off
-     * 
-     * @return
-     */
-    public boolean startToOff() {
-        if (dc.checkPreVertex("off", "開始")) {
-            return true;
-        }
-        return false;
-    }
+	/**
+	 * 開始状態→アイドリング中
+	 * 
+	 * @return
+	 */
+	public boolean startToidle() {
+		if (dc.checkPreVertex(idle, "開始")) {
+			return true;
+		}
+		return false;
+	}
 
-    /**
-     * off→on
-     * 
-     * @return
-     */
-    public boolean offToOn() {
-        if (dc.checkPreVertex("on", "off")) {
-            return true;
-        }
-        return false;
-    }
+	/**
+	 * アイドリング中→右移動指示待ち
+	 * 
+	 * @return
+	 */
+	public boolean idleToRightWait() {
+		if (dc.checkPreVertex(wait_right, idle)) {
+			return true;
+		}
+		return false;
+	}
 
-    /**
-     * on→off
-     * 
-     * @return
-     */
-    public boolean onToOff() {
-        if (dc.checkPreVertex("off", "on")) {
-            return true;
-        }
-        return false;
-    }
+	/**
+	 * 右移動指示待ち→右移動中
+	 * 
+	 * @return
+	 */
+	public boolean waitRightToMoveRight() {
+		if (dc.checkPreVertex(move_right, wait_right)) {
+			return true;
+		}
+		return false;
+	}
 
-    /**
-     * on→加熱中
-     * 
-     * @return
-     */
-    public boolean onToBoil() {
-        if (dc.checkPreVertex("加熱中", "on")) {
-            return true;
-        }
-        return false;
-    }
+	/**
+	 * 右移動中→奥移動指示待ち
+	 * 
+	 * @return
+	 */
+	public boolean moveRightToWaitBack() {
+		if (dc.checkPreVertex(wait_back, move_right)) {
+			return true;
+		}
+		return false;
+	}
 
-    /**
-     * 加熱中→保温中
-     * 
-     * @return
-     */
-    public boolean boilToKeep() {
-        if (dc.checkPreVertex("保温中", "加熱中")) {
-            return true;
-        }
-        return false;
-    }
+	/**
+	 * 右移動指示待ち→奥移動指示待ち
+	 * 
+	 * @return
+	 */
+	public boolean waitRightToWaitBack() {
+		if (dc.checkPreVertex(wait_back, wait_right)) {
+			return true;
+		}
+		return false;
+	}
 
-    /**
-     * 保温中→加熱中
-     * 
-     * @return
-     */
-    public boolean keepToBoil() {
-        if (dc.checkPreVertex("加熱中", "保温中")) {
-            return true;
-        }
-        return false;
-    }
+	/**
+	 * 奥移動指示待ち→奥移動中
+	 * 
+	 * @return
+	 */
+	public boolean waitBackToMoveBack() {
+		if (dc.checkPreVertex(move_back, wait_back)) {
+			return true;
+		}
+		return false;
+	}
 
-    /**
-     * 加熱中→off
-     * 
-     * @return
-     */
-    public boolean boilToOff() {
-        if (dc.checkPreVertex("off", "加熱中")) {
-            return true;
-        }
-        return false;
-    }
+	/**
+	 * 奥移動中→クレーン動作中
+	 * 
+	 * @return
+	 */
+	public boolean moveBackToMoveCrane() {
+		if (dc.checkPreVertex(crane_action, move_back)) {
+			return true;
+		}
+		return false;
+	}
 
-    /**
-     * 保温中→off
-     * 
-     * @return
-     */
-    public boolean keepToOff() {
-        if (dc.checkPreVertex("off", "保温中")) {
-            return true;
-        }
-        return false;
-    }
+	/**
+	 * 奥移動指示待ち→クレーン動作中
+	 * 
+	 * @return
+	 */
+	public boolean waitBackToCraneAction() {
+		if (dc.checkPreVertex(crane_action, wait_back)) {
+			return true;
+		}
+		return false;
+	}
 
-    // ////////////////////////////////////////
-    // 入れ子状態
-    // ///////////////////////////////////////
-    /**
-     * 入れ子<br>
-     * 開始→加熱中
-     * 
-     * @return
-     */
-    public boolean subStartToBoil() {
-        if (dc.checkPreSubVertex("on", "加熱中", "開始")) {
-            return true;
-        }
-        return false;
-    }
+	/**
+	 * クレーン動作中→復帰移動中
+	 * 
+	 * @return
+	 */
+	public boolean craneActionToMoveReturn() {
+		if (dc.checkPreVertex(move_return, crane_action)) {
+			return true;
+		}
+		return false;
+	}
 
-    /**
-     * 入れ子<br>
-     * 加熱中→保温中
-     * 
-     * @return
-     */
-    public boolean subBoilToKeep() {
-        if (dc.checkPreSubVertex("on", "保温中", "加熱中")) {
-            return true;
-        }
-        return false;
-    }
+	/**
+	 * 復帰移動中→景品投下動作中
+	 * 
+	 * @return
+	 */
+	public boolean moveReturnToPrizeAction() {
+		if (dc.checkPreVertex(prize_action, move_return)) {
+			return true;
+		}
+		return false;
+	}
 
-    /**
-     * 入れ子<br>
-     * 保温中→加熱中
-     * 
-     * @return
-     */
-    public boolean subKeepToBoil() {
-        if (dc.checkPreSubVertex("on", "保温中", "加熱中")) {
-            return true;
-        }
-        return false;
-    }
+	/**
+	 * 景品投下動作中→アイドリング中
+	 * 
+	 * @return
+	 */
+	public boolean prizeActionToIdle() {
+		if (dc.checkPreVertex(idle, prize_action)) {
+			return true;
+		}
+		return false;
+	}
 
-    // ////////////////////////////////////////
-    // トリガー
-    // ///////////////////////////////////////
+	// ////////////////////////////////////////
+	// 入れ子状態
+	// ///////////////////////////////////////
+	/**
+	 * 入れ子<br>
+	 * 開始→左移動中
+	 * 
+	 * @return
+	 */
+	public boolean startToMoveLeft() {
+		if (dc.checkPreSubVertex(move_return, move_left, "開始")) {
+			return true;
+		}
+		return false;
+	}
 
-    /**
-     * onに入ってくるONトリガー
-     * 
-     * @return
-     */
-    public boolean onTrigger() {
-        if (dc.checkVertexIncoming("on", "ON")) {
-            return true;
-        }
-        return false;
+	/**
+	 * 入れ子<br>
+	 * 左移動中→終了
+	 * 
+	 * @return
+	 */
+	public boolean moveLeftToFinish() {
+		if (dc.checkPreSubVertex(move_return, "終了", move_left)) {
+			return true;
+		}
+		return false;
+	}
 
-    }
+	/**
+	 * 入れ子<br>
+	 * 開始→手前移動中
+	 * 
+	 * @return
+	 */
+	public boolean startToMoveThisSide() {
+		if (dc.checkPreSubVertex(move_return, move_this_side, "開始")) {
+			return true;
+		}
+		return false;
+	}
 
-    /**
-     * offに入ってくるOFFトリガー
-     * 
-     * @return
-     */
-    public boolean offTrigger() {
-        if (dc.checkVertexIncoming("off", "OFF")) {
-            return true;
-        }
-        return false;
+	/**
+	 * 入れ子<br>
+	 * 手前移動中→終了
+	 * 
+	 * @return
+	 */
+	public boolean MoveThisSideToFinish() {
+		if (dc.checkPreSubVertex(move_return, "終了", move_this_side)) {
+			return true;
+		}
+		return false;
+	}
 
-    }
+	// ////////////////////////////////////////
+	// トリガー
+	// ///////////////////////////////////////
 
-    /**
-     * 保温に入ってくる沸騰トリガー
-     * 
-     * @return
-     */
-    public boolean boilTrigger() {
-        if (dc.checkVertexIncoming("保温中", "沸騰")) {
-            return true;
-        }
-        return false;
+	/**
+	 * 右移動指示待ちに入ってくるコイン投入トリガー
+	 * 
+	 * @return
+	 */
+	public boolean coinTrigger() {
+		if (dc.checkVertexIncoming(wait_right, tri_coin)) {
+			return true;
+		}
+		return false;
 
-    }
+	}
 
-    /**
-     * 加熱中に入ってくる沸騰ボタントリガー
-     * 
-     * @return
-     */
-    public boolean boilButtonTrigger() {
-        if (dc.checkVertexIncoming("加熱中", "沸騰ボタンを押す")) {
-            return true;
-        }
-        return false;
+	/**
+	 * 右移動中に入ってくる右ボタン押しトリガー
+	 * 
+	 * @return
+	 */
+	public boolean rightButtonTrigger() {
+		if (dc.checkVertexIncoming(move_right, tri_right_button)) {
+			return true;
+		}
+		return false;
 
-    }
+	}
 
-    // /////////////////////////////////////////////
-    // 入れ子 トリガー
-    // /////////////////////////////////////////////
+	/**
+	 * 奥移動指示待ちに入ってくる右端スイッチ・オントリガー
+	 * 
+	 * @return
+	 */
+	public boolean rightSwitchTrigger() {
+		if (dc.checkVertexIncoming(wait_back, tri_right_switch)) {
+			return true;
+		}
+		return false;
 
-    /**
-     * 入れ子<br>
-     * 保温に入ってくる沸騰トリガー
-     * 
-     * @return
-     */
-    public boolean subBoilTrigger() {
-        if (dc.checkSubVertexIncoming("on", "保温中", "沸騰")) {
-            return true;
-        }
-        return false;
+	}
 
-    }
+	/**
+	 * 奥移動指示待ちに入ってくる右ボタン放しトリガー
+	 * 
+	 * @return
+	 */
+	public boolean releaseRightButtonTrigger() {
+		if (dc.checkVertexIncoming(wait_back, tri_right_release)) {
+			return true;
+		}
+		return false;
 
-    /**
-     * 入れ子<br>
-     * 加熱中に入ってくる沸騰ボタントリガー
-     * 
-     * @return
-     */
-    public boolean subBoilButtonTrigger() {
-        if (dc.checkSubVertexIncoming("on", "加熱中", "沸騰ボタンを押す")) {
-            return true;
-        }
-        return false;
+	}
 
-    }
+	/**
+	 * 奥移動指示待ちに入ってくる30秒経過トリガー
+	 * 
+	 * @return
+	 */
+	public boolean thirtyToBackTrigger() {
+		if (dc.checkVertexIncoming(wait_back, tri_thirty)) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * 奥移動中に入ってくる奥ボタン押しトリガー
+	 * 
+	 * @return
+	 */
+	public boolean backBottunTrigger() {
+		if (dc.checkVertexIncoming(move_back, tri_back_button)) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * クレーン動作中に入ってくる奥スイッチ・オントリガー
+	 * 
+	 * @return
+	 */
+	public boolean backSwitchTrigger() {
+		if (dc.checkVertexIncoming(crane_action, tri_back_switch)) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * クレーン動作中に入ってくる奥ボタン離しトリガー
+	 * 
+	 * @return
+	 */
+	public boolean releaseBackButtonTrigger() {
+		if (dc.checkVertexIncoming(crane_action, tri_back_release)) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * クレーン動作中に入ってくる30秒経過トリガー
+	 * 
+	 * @return
+	 */
+	public boolean thirtyToCraneActionTrigger() {
+		if (dc.checkVertexIncoming(crane_action, tri_thirty)) {
+			return true;
+		}
+		return false;
+	}
+
+	// /////////////////////////////////////////////
+	// 入れ子 トリガー
+	// /////////////////////////////////////////////
+
+	/**
+	 * 入れ子<br>
+	 * 手前移動中→終了 手前端スイッチ・オントリガー
+	 * 
+	 * @return
+	 */
+	public boolean thisSideSwitchTrigger() {
+		if (dc.checkSubVertexIncoming(move_return, "終了", tri_this_side_switch)) {
+			return true;
+		}
+		return false;
+
+	}
+
+	/**
+	 * 入れ子<br>
+	 * 左移動中→終了 左端スイッチ・オントリガー
+	 * 
+	 * @return
+	 */
+	public boolean leftSwitchTrigger() {
+		if (dc.checkSubVertexIncoming(move_return, "終了", tri_left_switch)) {
+			return true;
+		}
+		return false;
+
+	}
 
 }
