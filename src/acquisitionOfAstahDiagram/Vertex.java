@@ -78,7 +78,7 @@ public class Vertex {
     ITransition[] getIncoming(String s) {
         ITransition[] it = new ITransition[4];
         for (int i = 0; i < iVertexes.length; i++) {// 全ての状態でループを回す
-            if (iVertexes[i].toString().equals(s)) {// ある状態名sの時
+            if (iVertexes[i].toString().startsWith(s)) {// ある状態名sの時
                 it = iVertexes[i].getIncomings();
                 break;
             }
@@ -105,10 +105,10 @@ public class Vertex {
         IVertex[] sub_vertexes = new IVertex[4];
 
         for (int i = 0; i < iVertexes.length; i++) {// 全ての状態でループを回す
-            if (iVertexes[i].toString().equals(parent_v_name)) {// ある状態名
+            if (iVertexes[i].toString().startsWith(parent_v_name)) {// ある状態名
                 sub_vertexes = sdf.getSubVertexes(iVertexes[i]);// その親状態の,入れ子状態達をゲット
                 for (int j = 0; j < sub_vertexes.length; j++) {// 入れ子状態配列ループ
-                    if (sub_vertexes[j].toString().equals(sub_v_name)) {// 指定の入れ子状態と一致したら
+                    if (sub_vertexes[j].toString().startsWith(sub_v_name)) {// 指定の入れ子状態と一致したら
                         it = sub_vertexes[j].getIncomings();
                         break;
                     }
@@ -134,7 +134,7 @@ public class Vertex {
         IVertex[] ivx = new IVertex[5];
         for (int i = 0; i < iVertexes.length; i++) {// 全ての状態でループを回す
 
-            if (iVertexes[i].toString().equals(s)) {// ある状態名sの時
+            if (iVertexes[i].toString().startsWith(s)) {// ある状態名sの時
                 ITransition[] it = iVertexes[i].getIncomings();
                 for (int j = 0; j < it.length; j++) {
                     ivx[j] = it[j].getSource();
@@ -165,11 +165,11 @@ public class Vertex {
         IVertex[] pre_sub_v = new IVertex[4];
 
         for (int i = 0; i < iVertexes.length; i++) {
-            if (iVertexes[i].toString().equals(parent_state_name)) {// 指定した親の状態名と同じだったら
+            if (iVertexes[i].toString().startsWith(parent_state_name)) {// 指定した親の状態名と同じだったら
                 iv = sdf.getSubVertexes(iVertexes[i]);// その親状態の,入れ子状態達をゲット
 
                 for (int j = 0; j < iv.length; j++) {// 入れ子状態配列でループ
-                    if (iv[j].toString().equals(sub_vertex_name)) {// 指定した入れ子の名前と同じだったら
+                    if (iv[j].toString().startsWith(sub_vertex_name)) {// 指定した入れ子の名前と同じだったら
                         ITransition[] it = iv[j].getIncomings();
                         for (int k = 0; k < it.length; k++) {
                             pre_sub_v[k] = it[k].getSource();
