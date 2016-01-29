@@ -233,6 +233,102 @@ public class State extends JLabel implements ActionListener {
 			}
 		}
 
+		// 30秒経過トリガー
+		if (CheckMethodAndFieldFinder.is_tri_thirty) {
+			trigger_label.setText(tri_thirty);
+			counter++;// カウンターを足す
+
+			if (counter > 20) {// 一定時間経つと
+				CheckMethodAndFieldFinder.is_tri_thirty = false;// 30秒経過トリガーをfalseに
+				trigger_label.setText(kara);// ラベルの中身を空にする
+				counter = 0;
+			}
+		}
+
+		// 右端スイッチONトリガー
+		if (CheckMethodAndFieldFinder.is_tri_right_switch) {
+			trigger_label.setText(tri_right_switch);
+			counter++;// カウンターを足す
+
+			if (counter > 20) {// 一定時間経つと
+				CheckMethodAndFieldFinder.is_tri_right_switch = false;// 右端スイッチONトリガーをfalseに
+				trigger_label.setText(kara);// ラベルの中身を空にする
+				counter = 0;
+			}
+		}
+
+		// 右ボタン放しトリガー
+		if (CheckMethodAndFieldFinder.is_tri_right_release) {
+			trigger_label.setText(tri_right_release);
+			counter++;// カウンターを足す
+
+			if (counter > 20) {// 一定時間経つと
+				CheckMethodAndFieldFinder.is_tri_right_release = false;// 右ボタン離しトリガーをfalseに
+				trigger_label.setText(kara);// ラベルの中身を空にする
+				counter = 0;
+			}
+		}
+
+		// 奥ボタントリガー
+		if (CheckMethodAndFieldFinder.is_tri_back_button) {
+			trigger_label.setText(tri_back_button);
+			counter++;// カウンターを足す
+
+			if (counter > 20) {// 一定時間経つと
+				CheckMethodAndFieldFinder.is_tri_back_button = false;// コイントリガーをfalseに
+				trigger_label.setText(kara);// ラベルの中身を空にする
+				counter = 0;
+			}
+		}
+
+		// 奥ボタン放しトリガー
+		if (CheckMethodAndFieldFinder.is_tri_back_release) {
+			trigger_label.setText(tri_back_release);
+			counter++;// カウンターを足す
+
+			if (counter > 20) {// 一定時間経つと
+				CheckMethodAndFieldFinder.is_tri_back_release = false;// 右ボタン離しトリガーをfalseに
+				trigger_label.setText(kara);// ラベルの中身を空にする
+				counter = 0;
+			}
+		}
+
+		// 奥スイッチONトリガー
+		if (CheckMethodAndFieldFinder.is_tri_back_switch) {
+			trigger_label.setText(tri_back_switch);
+			counter++;// カウンターを足す
+
+			if (counter > 20) {// 一定時間経つと
+				CheckMethodAndFieldFinder.is_tri_back_switch = false;// 奥スイッチONトリガーをfalseに
+				trigger_label.setText(kara);// ラベルの中身を空にする
+				counter = 0;
+			}
+		}
+
+		// クレーン上昇トリガー
+		if (CheckMethodAndFieldFinder.is_tri_crane_up) {
+			trigger_label.setText(tri_crane_up);
+			counter++;// カウンターを足す
+
+			if (counter > 20) {// 一定時間経つと
+				CheckMethodAndFieldFinder.is_tri_crane_up = false;// クレーン上昇トリガーをfalseに
+				trigger_label.setText(kara);// ラベルの中身を空にする
+				counter = 0;
+			}
+		}
+
+		// 手前端・左端スイッチONトリガー
+		if (CheckMethodAndFieldFinder.is_tri_this_and_left_switch) {
+			trigger_label.setText(tri_this_and_left_switch);
+			counter++;// カウンターを足す
+
+			if (counter > 20) {// 一定時間経つと
+				CheckMethodAndFieldFinder.is_tri_this_and_left_switch = false;// 手前端・左端スイッチONトリガーをfalseに
+				trigger_label.setText(kara);// ラベルの中身を空にする
+				counter = 0;
+			}
+		}
+
 	}
 
 }

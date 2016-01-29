@@ -6,6 +6,9 @@ public class CheckMethodAndFieldFinder {
 
 	DecisionController dc = new DecisionController();
 
+	// 30秒経過トリガーのためのカウンター
+	static int time_counter = 0;
+
 	// 文字
 	String kara = "";
 	String c_state = "状態";

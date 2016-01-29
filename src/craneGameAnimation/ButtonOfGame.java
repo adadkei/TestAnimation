@@ -17,6 +17,7 @@ public class ButtonOfGame implements ActionListener {
 	private JButton rightButton;
 	private JButton upButton;
 	private JButton coinButton;
+	private JButton releaseButton;
 
 	CheckMethodAndFieldFinder cm = new CheckMethodAndFieldFinder();
 	ButtonModel model;
@@ -28,9 +29,11 @@ public class ButtonOfGame implements ActionListener {
 	String right = "→";
 	String up = "↑";
 	String coin = "コイン投入";
+	String release = "ボタン放し";
 
 	// 判別用カウンタ
 	int right_button_counter = 0;
+	int right_button_release_counter = 0;
 
 	public ButtonOfGame() {
 		rightButton = new JButton(right);
@@ -54,8 +57,13 @@ public class ButtonOfGame implements ActionListener {
 		coinButton.setHorizontalAlignment(JLabel.CENTER);
 		coinButton.addActionListener(this);
 
-		model = rightButton.getModel();
-		
+		releaseButton = new JButton(release);
+		releaseButton.setBounds(b_x + 20, b_y + 45, 120, 30);
+		releaseButton.setFont(new Font("Meiryo UI", Font.BOLD, 18));
+		releaseButton.setBackground(Color.ORANGE);
+		releaseButton.setHorizontalAlignment(JLabel.CENTER);
+		releaseButton.addActionListener(this);
+
 	}
 
 	public JButton getRButton() {
@@ -70,33 +78,60 @@ public class ButtonOfGame implements ActionListener {
 		return coinButton;
 	}
 
-	public ButtonModel getmodel(){
-		return model;
+	public JButton getReleaseButton() {
+		return releaseButton;
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		
 		/*
 		 * 右ボタンが押された時
-		 */
+		 *********************************************/
 		if (e.getSource().equals(rightButton)) {
 
-			System.out.println("aaaaaaaa");
-			if (CheckMethodAndFieldFinder.is_wait_right && cm.waitRightToMoveRight()
-					&& cm.rightButtonTrigger() && right_button_counter == 0) {
+			if (CheckMethodAndFieldFinder.is_wait_right && cm.waitRightToMoveRight() && cm.rightButtonTrigger()
+					&& right_button_counter == 0) {
 				CheckMethodAndFieldFinder.is_move_right = true;// 右移動中にする
-				CheckMethodAndFieldFinder.is_tri_right_button=true;//右ボタンON
+				CheckMethodAndFieldFinder.is_tri_right_button = true;// 右ボタンON
 				CheckMethodAndFieldFinder.is_wait_right = false;// 右移動指示待ちをfalseに
-				//right_button_counter++;// 終了の合図
+				right_button_counter++;// 終了の合図
+				CheckMethodAndFieldFinder.time_counter = 0;// 30秒経過トリガーを0秒にする
 			}
 		}
 
 		/*
-		 * 上ボタンが押された時
+		 * 奥ボタンが押された時
 		 */
 		if (e.getSource().equals(upButton)) {
 
+			if (CheckMethodAndFieldFinder.is_wait_back && cm.waitBackToMoveBack() && cm.backBottunTrigger()) {
+				CheckMethodAndFieldFinder.is_wait_back = false;// 奥移動指示待ちをfalseに
+				CheckMethodAndFieldFinder.is_move_back = true;// 奥移動中にする
+				CheckMethodAndFieldFinder.is_tri_back_button = true;// 奥ボタンON
+
+				CheckMethodAndFieldFinder.time_counter = 0;// 30秒経過トリガーを0秒にする
+			}
+		}
+
+		/*
+		 * 放すボタンが押された時
+		 */
+		if (e.getSource().equals(releaseButton)) {
+
+			// 右移動中→奥移動指示待ち,右ボタン放しトリガー
+			if (cm.moveRightToWaitBack() && cm.releaseRightButtonTrigger() && CheckMethodAndFieldFinder.is_move_right) {// もし右移動中で、放すボタンが押されたら
+				CheckMethodAndFieldFinder.is_move_right = false;// 右移動中を解除
+				CheckMethodAndFieldFinder.is_wait_back = true;// 奥移動指示待ちにする
+				CheckMethodAndFieldFinder.is_tri_right_release = true;// 右ボタン離しをtrueに
+			}
+
+			// 奥移動中→クレーン動作中,奥ボタン放しトリガー
+			if (cm.moveBackToMoveCrane() && cm.releaseBackButtonTrigger() && CheckMethodAndFieldFinder.is_move_back) {// もし奥移動中で、放すボタンが押されたら
+				CheckMethodAndFieldFinder.is_move_back = false;// 奥移動中を解除
+				CheckMethodAndFieldFinder.is_crane_action = true;// クレーン動作中にする
+				CheckMethodAndFieldFinder.is_tri_back_release = true;// 奥ボタン離しをtrueに
+			}
 		}
 
 		/*

@@ -37,6 +37,7 @@ public class Panel extends JPanel implements ActionListener {
         add(bg.getRButton());
         add(bg.getUButton());
         add(bg.getCButton());
+        add(bg.getReleaseButton());
 
         new TimerController();// 図の判別用タイマースタート
 
