@@ -3,6 +3,7 @@ package craneGameAnimation;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.Timer;
 
@@ -17,6 +18,12 @@ public class TimerController implements ActionListener {
 
 	// 判別用カウンタ
 	int idle_count = 0;
+	
+	//指示待ちカウンター
+	int wait_counter = 100;
+	
+	//クレーン動作前のカウンター
+	int crane_counter = 0;
 
 	public TimerController() {
 		// タイマー
@@ -45,7 +52,7 @@ public class TimerController implements ActionListener {
 		}
 		// 右移動指示待ち→奥移動指示待ち
 		if (cm.waitRightToWaitBack() && cm.thirtyToBackTrigger() && CheckMethodAndFieldFinder.is_wait_right
-				&& CheckMethodAndFieldFinder.time_counter > 80) {// もし右移動指示待ち状態、かつカウンターが100を超えたら
+				&& CheckMethodAndFieldFinder.time_counter > wait_counter) {// もし右移動指示待ち状態、かつカウンターが100を超えたら
 			CheckMethodAndFieldFinder.is_wait_right = false;// 右移動指示待ちを解除
 			CheckMethodAndFieldFinder.is_wait_back = true;// 奥移動指示待ちにする
 			CheckMethodAndFieldFinder.is_tri_thirty = true;// 30秒トリガーフラグon
@@ -67,7 +74,7 @@ public class TimerController implements ActionListener {
 		}
 		// 奥移動指示待ち→クレーン動作中
 		if (cm.waitBackToCraneAction() && cm.thirtyToCraneActionTrigger() && CheckMethodAndFieldFinder.is_wait_back
-				&& CheckMethodAndFieldFinder.time_counter > 80) {// もし奥移動指示待ち状態、かつカウンターが一定数を超えたら
+				&& CheckMethodAndFieldFinder.time_counter > wait_counter) {// もし奥移動指示待ち状態、かつカウンターが一定数を超えたら
 			CheckMethodAndFieldFinder.is_wait_back = false;// 奥移動指示待ちを解除
 			CheckMethodAndFieldFinder.is_crane_action = true;// クレーン動作中にする
 			CheckMethodAndFieldFinder.is_tri_thirty = true;// 30秒トリガーフラグon
@@ -99,7 +106,7 @@ public class TimerController implements ActionListener {
 			CheckMethodAndFieldFinder.is_prize_action = true;// 景品投下動作中にする
 		}
 		// テスト用
-		System.out.println("time_counter" + CheckMethodAndFieldFinder.time_counter);
+		//System.out.println("time_counter" + CheckMethodAndFieldFinder.time_counter);
 
 	}
 }
