@@ -18,12 +18,9 @@ public class TimerController implements ActionListener {
 
 	// 判別用カウンタ
 	int idle_count = 0;
-	
-	//指示待ちカウンター
+
+	// 指示待ちカウンター
 	int wait_counter = 100;
-	
-	//クレーン動作前のカウンター
-	int crane_counter = 0;
 
 	public TimerController() {
 		// タイマー
@@ -105,8 +102,11 @@ public class TimerController implements ActionListener {
 			CheckMethodAndFieldFinder.is_move_return = false;// 復帰移動中を解除する
 			CheckMethodAndFieldFinder.is_prize_action = true;// 景品投下動作中にする
 		}
+		
+		
 		// テスト用
-		//System.out.println("time_counter" + CheckMethodAndFieldFinder.time_counter);
+		// System.out.println("time_counter" +
+		// CheckMethodAndFieldFinder.time_counter);
 
 	}
 }

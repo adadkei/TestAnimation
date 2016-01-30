@@ -10,7 +10,10 @@ public class FromAboveArm extends JPanel {
 	Image img;
 
 	private int y = 0;
-	private int a = 0;//一回だけ実行用
+	private int a = 0;// 一回だけ実行用
+
+	private boolean is_this = false;
+	private boolean is_left = false;
 
 	static int fromabovearm_y_limit = 75;
 
@@ -37,6 +40,39 @@ public class FromAboveArm extends JPanel {
 		if (y <= fromabovearm_y_limit && a == 0) {
 			CheckMethodAndFieldFinder.is_tri_back_switch = true;
 			a++;
+		}
+
+		// もし復帰移動中だったら
+		if (CheckMethodAndFieldFinder.is_move_return) {
+
+			if (!is_this) {// もし手前にまだ来ていない状態だったら
+
+				// もし移動したアームが最初の手前位置になかったら
+				if (y <= (FromAboveIllustration.ABOVE_ILL_Y + 227)) {
+					y = y + 4;
+				}
+				// もし手前位置になったら
+				if (y >= (FromAboveIllustration.ABOVE_ILL_Y + 227)) {
+					is_this = true;
+				}
+			}
+
+			if (!is_left) {// もしまだ一番左に来ていない状態だったら
+
+				// もし移動したアームが最初の左位置になかったら
+				if (FromAboveStrut.ABOVE_ST_X >= (FromAboveIllustration.ABOVE_ILL_X + 24)) {
+					FromAboveStrut.ABOVE_ST_X = FromAboveStrut.ABOVE_ST_X - 5;
+				}
+
+				// もし一番左に来たら
+				if (FromAboveStrut.ABOVE_ST_X <= (FromAboveIllustration.ABOVE_ILL_X + 24)) {
+					is_left = true;
+				}
+			}
+
+			if (is_left && is_this) {// もし手間端、左端に来た状態になったら
+				CheckMethodAndFieldFinder.is_tri_this_and_left_switch = true;
+			}
 		}
 	}
 }

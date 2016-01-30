@@ -26,7 +26,8 @@ public class Panel extends JPanel implements ActionListener {
 	FromAboveArm faa = new FromAboveArm();// 上から見たアーム
 	ButtonOfGame bg = new ButtonOfGame();
 	State state = new State();
-
+	Prize prize = new Prize();
+	
 	Timer timer;
 
 	public Panel() {// コンストラクタ
@@ -64,10 +65,12 @@ public class Panel extends JPanel implements ActionListener {
 
 		fi.drawFrontIll(g2);// 前から見たイラストを表示
 		fa.drawFrontArm(g2);// アームを表示
-		
+
 		fai.drawAboveIll(g2);// 上からみたイラストを表示
 		fas.drawAboveStrut(g2);// 上から見た支柱を表示
 		faa.drawAboveArm(g2);// 上から見たアームを表示
-		
+
+		prize.drawPrize(g2);// ボールを表示
+
 	}
 }

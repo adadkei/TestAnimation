@@ -32,8 +32,8 @@ public class ButtonOfGame implements ActionListener {
 	String release = "ボタン放し";
 
 	// 判別用カウンタ
-	int right_button_counter = 0;
-	int right_button_release_counter = 0;
+	static int right_button_counter = 0;
+	static int right_button_release_counter = 0;
 
 	public ButtonOfGame() {
 		rightButton = new JButton(right);
@@ -138,11 +138,12 @@ public class ButtonOfGame implements ActionListener {
 		 * コインボタンが押された時
 		 */
 		if (e.getSource().equals(coinButton)) {
-			if (CheckMethodAndFieldFinder.is_idle) {// もしアイドリング中だったら
+			if (CheckMethodAndFieldFinder.is_idle && cm.coinTrigger() && cm.idleToRightWait()) {// もしアイドリング中だったら
 				CheckMethodAndFieldFinder.is_wait_right = true;// 右移動指示待ちにする
 				CheckMethodAndFieldFinder.is_idle = false;// アイドリング中ではなくする
 				CheckMethodAndFieldFinder.is_tri_coin = true;// コイントリガーON
 			}
+
 		}
 	}
 
