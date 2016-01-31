@@ -2,12 +2,8 @@ package craneGameAnimation;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JPanel;
-
-import org.apache.poi.util.SystemOutLogger;
 
 public class FrontArm extends JPanel {
 
@@ -25,7 +21,7 @@ public class FrontArm extends JPanel {
 	static int FRONT_ARM_X = FrontIllustration.FRONT_ILL_X - 30;
 	static int FRONT_ARM_Y = FrontIllustration.FRONT_ILL_Y - 22;
 
-	List<Image> frontArmImages = new ArrayList<Image>();
+	CheckMethodAndFieldFinder cm = new CheckMethodAndFieldFinder();
 
 	public FrontArm() {
 		// TODO Auto-generated constructor stub
@@ -64,8 +60,8 @@ public class FrontArm extends JPanel {
 				if (FRONT_ARM_Y > frontarm_y_top_limit) {
 					FRONT_ARM_Y = FRONT_ARM_Y - speed;
 				}
-				// もし一番上まで行ったら
-				if (FRONT_ARM_Y <= frontarm_y_top_limit) {
+				// もし一番上まで行ったら,かつクレーン上昇記述あったら
+				if (FRONT_ARM_Y <= frontarm_y_top_limit && cm.craneUpTrigger()) {
 					CheckMethodAndFieldFinder.is_tri_crane_up = true;
 					b++;
 				}
@@ -97,10 +93,8 @@ public class FrontArm extends JPanel {
 			FRONT_ARM_X = FRONT_ARM_X + 5;
 		}
 
-		// もし右端スイッチのところまでに到着したら、右端スイッチon,かつ一回だけ実行
-		if (FRONT_ARM_X > frontarm_x_limit && a == 0)
-
-		{
+		// もし右端スイッチのところまでに到着したら、かつこの記述が図にあったら、右端スイッチon,かつ一回だけ実行
+		if (FRONT_ARM_X > frontarm_x_limit && cm.rightSwitchTrigger() && a == 0) {
 			CheckMethodAndFieldFinder.is_tri_right_switch = true;
 			a++;
 		}

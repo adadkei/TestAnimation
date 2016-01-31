@@ -15,6 +15,7 @@ public class State extends JLabel implements ActionListener {
 
 	Timer timer;
 	int counter;// トリガー一定時間表示ためのカウンター
+	int show_counter = 15;// トリガーをどれくらい表示させるか
 
 	List<JLabel> lists = new ArrayList<>();// リスト
 	public JLabel state_label;
@@ -214,7 +215,7 @@ public class State extends JLabel implements ActionListener {
 			trigger_label.setText(tri_coin);
 			counter++;// カウンターを足す
 
-			if (counter > 20) {// 一定時間経つと
+			if (counter > show_counter) {// 一定時間経つと
 				CheckMethodAndFieldFinder.is_tri_coin = false;// コイントリガーをfalseに
 				trigger_label.setText(kara);// ラベルの中身を空にする
 				counter = 0;
@@ -222,11 +223,11 @@ public class State extends JLabel implements ActionListener {
 		}
 
 		// 右ボタントリガー
-		if (CheckMethodAndFieldFinder.is_tri_right_button) {
+		else if (CheckMethodAndFieldFinder.is_tri_right_button) {
 			trigger_label.setText(tri_right_button);
 			counter++;// カウンターを足す
 
-			if (counter > 20) {// 一定時間経つと
+			if (counter > show_counter) {// 一定時間経つと
 				CheckMethodAndFieldFinder.is_tri_right_button = false;// コイントリガーをfalseに
 				trigger_label.setText(kara);// ラベルの中身を空にする
 				counter = 0;
@@ -234,11 +235,11 @@ public class State extends JLabel implements ActionListener {
 		}
 
 		// 30秒経過トリガー
-		if (CheckMethodAndFieldFinder.is_tri_thirty) {
+		else if (CheckMethodAndFieldFinder.is_tri_thirty) {
 			trigger_label.setText(tri_thirty);
 			counter++;// カウンターを足す
 
-			if (counter > 20) {// 一定時間経つと
+			if (counter > show_counter) {// 一定時間経つと
 				CheckMethodAndFieldFinder.is_tri_thirty = false;// 30秒経過トリガーをfalseに
 				trigger_label.setText(kara);// ラベルの中身を空にする
 				counter = 0;
@@ -246,11 +247,11 @@ public class State extends JLabel implements ActionListener {
 		}
 
 		// 右端スイッチONトリガー
-		if (CheckMethodAndFieldFinder.is_tri_right_switch) {
+		else if (CheckMethodAndFieldFinder.is_tri_right_switch) {
 			trigger_label.setText(tri_right_switch);
 			counter++;// カウンターを足す
 
-			if (counter > 20) {// 一定時間経つと
+			if (counter > show_counter) {// 一定時間経つと
 				CheckMethodAndFieldFinder.is_tri_right_switch = false;// 右端スイッチONトリガーをfalseに
 				trigger_label.setText(kara);// ラベルの中身を空にする
 				counter = 0;
@@ -258,11 +259,11 @@ public class State extends JLabel implements ActionListener {
 		}
 
 		// 右ボタン放しトリガー
-		if (CheckMethodAndFieldFinder.is_tri_right_release) {
+		else if (CheckMethodAndFieldFinder.is_tri_right_release) {
 			trigger_label.setText(tri_right_release);
 			counter++;// カウンターを足す
 
-			if (counter > 20) {// 一定時間経つと
+			if (counter > show_counter) {// 一定時間経つと
 				CheckMethodAndFieldFinder.is_tri_right_release = false;// 右ボタン離しトリガーをfalseに
 				trigger_label.setText(kara);// ラベルの中身を空にする
 				counter = 0;
@@ -270,11 +271,11 @@ public class State extends JLabel implements ActionListener {
 		}
 
 		// 奥ボタントリガー
-		if (CheckMethodAndFieldFinder.is_tri_back_button) {
+		else if (CheckMethodAndFieldFinder.is_tri_back_button) {
 			trigger_label.setText(tri_back_button);
 			counter++;// カウンターを足す
 
-			if (counter > 20) {// 一定時間経つと
+			if (counter > show_counter) {// 一定時間経つと
 				CheckMethodAndFieldFinder.is_tri_back_button = false;// コイントリガーをfalseに
 				trigger_label.setText(kara);// ラベルの中身を空にする
 				counter = 0;
@@ -282,11 +283,11 @@ public class State extends JLabel implements ActionListener {
 		}
 
 		// 奥ボタン放しトリガー
-		if (CheckMethodAndFieldFinder.is_tri_back_release) {
+		else if (CheckMethodAndFieldFinder.is_tri_back_release) {
 			trigger_label.setText(tri_back_release);
 			counter++;// カウンターを足す
 
-			if (counter > 20) {// 一定時間経つと
+			if (counter > show_counter) {// 一定時間経つと
 				CheckMethodAndFieldFinder.is_tri_back_release = false;// 右ボタン離しトリガーをfalseに
 				trigger_label.setText(kara);// ラベルの中身を空にする
 				counter = 0;
@@ -294,11 +295,11 @@ public class State extends JLabel implements ActionListener {
 		}
 
 		// 奥スイッチONトリガー
-		if (CheckMethodAndFieldFinder.is_tri_back_switch) {
+		else if (CheckMethodAndFieldFinder.is_tri_back_switch) {
 			trigger_label.setText(tri_back_switch);
 			counter++;// カウンターを足す
 
-			if (counter > 20) {// 一定時間経つと
+			if (counter > show_counter) {// 一定時間経つと
 				CheckMethodAndFieldFinder.is_tri_back_switch = false;// 奥スイッチONトリガーをfalseに
 				trigger_label.setText(kara);// ラベルの中身を空にする
 				counter = 0;
@@ -306,11 +307,11 @@ public class State extends JLabel implements ActionListener {
 		}
 
 		// クレーン上昇トリガー
-		if (CheckMethodAndFieldFinder.is_tri_crane_up) {
+		else if (CheckMethodAndFieldFinder.is_tri_crane_up) {
 			trigger_label.setText(tri_crane_up);
 			counter++;// カウンターを足す
 
-			if (counter > 20) {// 一定時間経つと
+			if (counter > show_counter) {// 一定時間経つと
 				CheckMethodAndFieldFinder.is_tri_crane_up = false;// クレーン上昇トリガーをfalseに
 				trigger_label.setText(kara);// ラベルの中身を空にする
 				counter = 0;
@@ -318,11 +319,11 @@ public class State extends JLabel implements ActionListener {
 		}
 
 		// 手前端・左端スイッチONトリガー
-		if (CheckMethodAndFieldFinder.is_tri_this_and_left_switch) {
+		else if (CheckMethodAndFieldFinder.is_tri_this_and_left_switch) {
 			trigger_label.setText(tri_this_and_left_switch);
 			counter++;// カウンターを足す
 
-			if (counter > 20) {// 一定時間経つと
+			if (counter > show_counter) {// 一定時間経つと
 				CheckMethodAndFieldFinder.is_tri_this_and_left_switch = false;// 手前端・左端スイッチONトリガーをfalseに
 				trigger_label.setText(kara);// ラベルの中身を空にする
 				counter = 0;

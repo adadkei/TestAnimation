@@ -9,6 +9,7 @@ public class Prize extends JPanel {
 
 	static boolean is_prize;
 	Image img;
+	CheckMethodAndFieldFinder cm = new CheckMethodAndFieldFinder();
 
 	private int x = FrontIllustration.FRONT_ILL_X + 12;
 	private int y = FrontIllustration.FRONT_ILL_Y + 50;
@@ -29,8 +30,9 @@ public class Prize extends JPanel {
 			if (y >= limit) {// もし景品が、景品口に到着したら
 				is_prize = false;
 				CheckMethodAndFieldFinder.is_prize_action = false;
-				CheckMethodAndFieldFinder.is_idle = true;
-
+				if (cm.prizeActionToIdle()) {// もし正しい記述があったら
+					CheckMethodAndFieldFinder.is_idle = true;
+				}
 			}
 
 		}

@@ -17,6 +17,8 @@ public class FromAboveArm extends JPanel {
 
 	static int fromabovearm_y_limit = 75;
 
+	CheckMethodAndFieldFinder cm = new CheckMethodAndFieldFinder();
+
 	public FromAboveArm() {
 		img = getToolkit().getImage(Panel.pass + "\\abovearm.png");
 		y = FromAboveStrut.ABOVE_ST_Y + 225;
@@ -36,8 +38,8 @@ public class FromAboveArm extends JPanel {
 			y = y - 4;
 		}
 
-		// もし奥端スイッチのところまでに到着したら、奥端スイッチon,かつ一回だけ実行
-		if (y <= fromabovearm_y_limit && a == 0) {
+		// もし奥端スイッチのところまでに到着したら、かつ図にこの記述があったら、奥端スイッチon,かつ一回だけ実行
+		if (y <= fromabovearm_y_limit && a == 0 && cm.backSwitchTrigger()) {
 			CheckMethodAndFieldFinder.is_tri_back_switch = true;
 			a++;
 		}
@@ -70,7 +72,8 @@ public class FromAboveArm extends JPanel {
 				}
 			}
 
-			if (is_left && is_this) {// もし手間端、左端に来た状態になったら
+			// もし手間端、左端に来た状態になったら,かつ手前端・左端スイッチとりがーあったら
+			if (is_left && is_this && cm.thisSideAndLeftTrigger()) {
 				CheckMethodAndFieldFinder.is_tri_this_and_left_switch = true;
 			}
 		}
